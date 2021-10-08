@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -70,9 +71,9 @@ const Navbar = () => {
               placeholder="Search"
               aria-label="Search"
             />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
+            <Link to="/Login" class="btn btn-primary" type="button">
+              Login
+            </Link>
           </form>
         </div>
       </div>
