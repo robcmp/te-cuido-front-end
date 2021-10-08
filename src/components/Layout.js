@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "../views/Home";
 import Navbar from "./Navbar";
+import Login from "../views/Login"
 
 const Layout = () => {
   return (
@@ -12,6 +13,9 @@ const Layout = () => {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route exact path="/Login">
+            <Login />
+          </Route> 
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
       </div>
