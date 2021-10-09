@@ -1,6 +1,7 @@
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
   const loginStyle = {
@@ -34,9 +35,13 @@ const Login = (props) => {
             <div className="row mt-4">
               <div className="col-md-8 fw-bold">¿Olvidaste tu contraseña?</div>
               <div className="col-md-4 fw-bold">
-                <button className="btn btn-warning fw-bold">Registrarse</button>
-
-                </div>
+                <Link
+                  to="/Register"
+                  className="btn btn-warning fw-bold"
+                  type="button">
+                  Registrarse
+                </Link>
+              </div>
             </div>
           </Form>
         </div>
