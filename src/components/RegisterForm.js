@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
   const RegisterForm=()=>{
-    const formSchema = Yup.object().shape({
+    const formSchema = Yup.object().shape({ 
       
         Name: Yup.string()
         .min(5, `min 5 char`)
