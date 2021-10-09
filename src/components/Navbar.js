@@ -72,7 +72,14 @@ const Navbar = () => {
             >
               Iniciar Sesión
             </Link>
-            <button className="btn btn-warning fw-bold">Registrarse</button>
+
+            <Link
+              to="/Register"
+              className="btn btn-warning fw-bold"
+              type="button">
+              Registrarse
+            </Link>
+
           </div>
         </div>
       </div>
