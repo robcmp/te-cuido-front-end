@@ -70,9 +70,9 @@ const Navbar = () => {
               className="btn btn-primary me-4 fw-bold"
               type="button"
             >
-              Login
+              Iniciar Sesión
             </Link>
-            <button className="btn btn-warning fw-bold"> Sign Up</button>
+            <button className="btn btn-warning fw-bold">Registrarse</button>
           </div>
         </div>
       </div>
