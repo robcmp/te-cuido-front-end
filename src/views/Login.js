@@ -12,23 +12,32 @@ const Login = (props) => {
     boxShadow: "0px 0px 10px 10px rgba(0,0,0,0.15)"
   };
   const { touched, errors } = props;
-  return(
+  return (
     <React.Fragment>
       <div className="container">
         <div className="login-wrapper" style={loginStyle}>
-          <h2>Login Page</h2>
+          <div className="d-flex"><h2 className="mx-auto">Bienvenido</h2></div>
           <Form className="form-container">
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <Field type="text" name="email" className={"form-control"} placeholder="Email" />
-              { touched.email && errors.email && <span className="help-block text-danger">{errors.email}</span> }
+            <div className="form-group mt-2">
+              <label htmlFor="email">Correo</label>
+              <Field type="text" name="email" className={"form-control"} placeholder="Correo" />
+              {touched.email && errors.email && <span className="help-block text-danger">{errors.email}</span>}
             </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Field type="password" name="password" className={"form-control"} placeholder="Password" />
-              { touched.password && errors.password && <span className="help-block text-danger">{errors.password}</span> }
+            <div className="form-group mt-3">
+              <label htmlFor="password">Contraseña</label>
+              <Field type="password" name="password" className={"form-control"} placeholder="Contraseña" />
+              {touched.password && errors.password && <span className="help-block text-danger">{errors.password}</span>}
             </div>
-            <button type="submit" className="btn btn-primary">Login</button>
+            <div className="d-grid gap-2">
+              <button type="submit" className="btn btn-primary btn-large fw-bold mt-4">Iniciar Sesión</button>
+            </div>
+            <div className="row mt-4">
+              <div className="col-md-8 fw-bold">¿Olvidaste tu contraseña?</div>
+              <div className="col-md-4 fw-bold">
+                <button className="btn btn-warning fw-bold">Registrarse</button>
+
+                </div>
+            </div>
           </Form>
         </div>
       </div>
@@ -52,7 +61,7 @@ const LoginFormik = withFormik({
     fetch(REST_API_URL, {
       method: 'post',
       body: JSON.stringify(values)
-    }).then(response=> {
+    }).then(response => {
       if (response.ok) {
         return response.json();
       } else {
