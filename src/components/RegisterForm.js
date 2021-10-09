@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+//aqui comienza todo el formulario
 
   const RegisterForm=()=>{
     const formSchema = Yup.object().shape({ 
@@ -34,7 +35,7 @@ import * as Yup from "yup";
           .required("field required")
           .min(8, `min  8 char`),
       });
-    
+    //aqui empieza la estructura 
       return (
         <>
 
