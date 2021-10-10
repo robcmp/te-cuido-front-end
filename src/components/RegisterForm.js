@@ -1,7 +1,9 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { object, string, ref, number } from "yup";
+import { object, string, ref, number, bool } from "yup";
 //aqui comienza todo el formulario
+
+const rutRegex = "^([0-9]+-[0-9Kk])$";
 
 const RegisterForm = () => {
   const formSchema = object().shape({
@@ -27,7 +29,13 @@ const RegisterForm = () => {
       .required("Por favor confirme su contrase;a")
       .oneOf([ref("Password")], "Las claves no coinciden"),
 
-    ID: number().required("Campo requerido").min(8, `min  8 char`),
+    ID: string().required("Campo requerido").matches(rutRegex, "RUT invalido"),
+    IDphoto: string().required("Campo requerido"),
+    Country: string().required("Campo requerido"),
+    City: string().required("Campo requerido"),
+    Phone: string().required("Campo requerido"),
+    Occupation: string().required("Campo requerido"),
+    vaccinated: bool().oneOf([true], "Estar vacunado es requerido"),
   });
   //aqui empieza la estructura
   return (
@@ -36,10 +44,16 @@ const RegisterForm = () => {
         Name: "",
         LastName: "",
         UserName: "",
+        Email: "",
         Password: "",
         confirmPassword: "",
-        Email: "",
-        MobilePhone: "",
+        ID: "",
+        IDphoto: "",
+        Country: "",
+        City: "",
+        Phone: "",
+        Occupation: "",
+        vaccinated: false,
       }}
       validationSchema={formSchema}
       onSubmit={(values) => console.log(values)}
@@ -49,6 +63,20 @@ const RegisterForm = () => {
           <div className="row">
             <div className="col-md-6">
               <div>
+                <div className="form-group">
+                  <label htmlFor="ProfilePhoto">Foto de Perfil:</label>
+                  <input
+                    name="avatar"
+                    accept="image/*"
+                    id="contained-button-file"
+                    type="file"
+                  />
+                  <ErrorMessage
+                    name="ProfilePhoto"
+                    component="div"
+                    className="field-error text-danger"
+                  />
+                </div>
                 <label htmlFor="Name">Nombres:</label>
                 <Field
                   className="form-control"
@@ -120,7 +148,7 @@ const RegisterForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="ID">RUT:</label>
+                <label htmlFor="ID">DNI:</label>
                 <Field
                   className="form-control"
                   name="ID"
@@ -133,6 +161,89 @@ const RegisterForm = () => {
                   className="field-error text-danger"
                 />
               </div>
+              <div className="form-group">
+                <label htmlFor="IDphoto">DNI foto:</label>
+                <Field
+                  className="form-control"
+                  name="IDphoto"
+                  placeholder=""
+                  type="string"
+                />
+                <ErrorMessage
+                  name="IDphoto"
+                  component="div"
+                  className="field-error text-danger"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="Country">Pais:</label>
+                <Field
+                  className="form-control"
+                  name="Country"
+                  placeholder=""
+                  type="string"
+                />
+                <ErrorMessage
+                  name="Country"
+                  component="div"
+                  className="field-error text-danger"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="City">Ciudad:</label>
+                <Field
+                  className="form-control"
+                  name="City"
+                  placeholder=""
+                  type="string"
+                />
+                <ErrorMessage
+                  name="City"
+                  component="div"
+                  className="field-error text-danger"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="Phone">Telefono:</label>
+                <Field
+                  className="form-control"
+                  name="Phone"
+                  placeholder=""
+                  type="string"
+                />
+                <ErrorMessage
+                  name="Phone"
+                  component="div"
+                  className="field-error text-danger"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="Occupation">Ocupacion:</label>
+                <Field
+                  className="form-control"
+                  name="Occupation"
+                  placeholder=""
+                  type="string"
+                />
+                <ErrorMessage
+                  name="Occupation"
+                  component="div"
+                  className="field-error text-danger"
+                />
+              </div>
+              <Field
+                type="checkbox"
+                name="vaccinated"
+                className="form-check-input"
+              />
+              <label htmlFor="vaccinated" className="form-check-label">
+                Vacunado
+              </label>
+              <ErrorMessage
+                name="vaccinated"
+                component="div"
+                className="invalid-feedback"
+              />
             </div>
             <div className="col-md-4">
               <img
