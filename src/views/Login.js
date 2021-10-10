@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { withFormik, Form, Field } from "formik";
+import React from "react";
+import { Form, Field, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 
 const Login = (props) => {
-  /* const history = useHistory(); */
+  const history = useHistory();
   const loginStyle = {
     margin: "32px auto 37px",
     maxWidth: "530px",
@@ -13,9 +13,43 @@ const Login = (props) => {
     borderRadius: "10px",
     boxShadow: "0px 0px 10px 10px rgba(0,0,0,0.15)",
   };
-  const { touched, errors } = props;
+  const formSchema = Yup.object().shape({
+    email: Yup.string().email("Email not valid").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
   return (
-    <React.Fragment>
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      validationSchema={formSchema}
+      onSubmit={(values) => {
+        const REST_API_URL = "http://localhost:5000/login";
+        fetch(REST_API_URL, {
+          method: "post",
+          body: JSON.stringify(values),
+        })
+          .then((response) => {
+            if (response.ok) {
+              history.push("/User");
+              return response.json();
+            } else {
+              // HANDLE ERROR
+              throw new Error("Something went wrong");
+            }
+          })
+          .then((data) => {
+            // HANDLE RESPONSE DATA
+            console.log(data);
+          })
+          .catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+          });
+      }}
+    >
       <div className="container">
         <div className="login-wrapper" style={loginStyle}>
           <div className="d-flex">
@@ -30,9 +64,11 @@ const Login = (props) => {
                 className={"form-control"}
                 placeholder="Correo"
               />
-              {touched.email && errors.email && (
-                <span className="help-block text-danger">{errors.email}</span>
-              )}
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="help-block text-danger"
+              />
             </div>
             <div className="form-group mt-3">
               <label htmlFor="password">Contraseña</label>
@@ -42,11 +78,11 @@ const Login = (props) => {
                 className={"form-control"}
                 placeholder="Contraseña"
               />
-              {touched.password && errors.password && (
-                <span className="help-block text-danger">
-                  {errors.password}
-                </span>
-              )}
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="help-block text-danger"
+              />
             </div>
             <div className="d-grid gap-2">
               <button
@@ -71,46 +107,8 @@ const Login = (props) => {
           </Form>
         </div>
       </div>
-    </React.Fragment>
+    </Formik>
   );
 };
 
-const LoginFormik = withFormik({
-  mapPropsToValues: (props) => {
-    return {
-      email: props.email || "",
-      password: props.password || "",
-    };
-  },
-  validationSchema: Yup.object().shape({
-    email: Yup.string().email("Email not valid").required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  }),
-
-  handleSubmit: (values) => {
-    const REST_API_URL = "http://localhost:5000/login";
-    fetch(REST_API_URL, {
-      method: "post",
-      body: JSON.stringify(values),
-    })
-      .then((response) => {
-        if (response.ok) {
-          /* history.push('/User') */
-          return response.json();
-        } else {
-          // HANDLE ERROR
-          throw new Error("Something went wrong");
-        }
-      })
-      .then((data) => {
-        // HANDLE RESPONSE DATA
-        console.log(data);
-      })
-      .catch((error) => {
-        // HANDLE ERROR
-        console.log(error);
-      });
-  },
-})(Login);
-
-export default LoginFormik;
+export default Login;
