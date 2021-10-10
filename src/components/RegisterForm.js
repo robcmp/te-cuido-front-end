@@ -1,34 +1,33 @@
 import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { object, string, ref, number } from "yup";
 //aqui comienza todo el formulario
 
 const RegisterForm = () => {
-  const formSchema = Yup.object().shape({
-    Name: Yup.string()
-      .min(5, `min 5 char`)
-      .max(25, `max 25 char`)
-      .required("field required"),
-    LastName: Yup.string()
-      .min(5, `min 5 char`)
-      .max(25, `max 25 char`)
-      .required("field required"),
-    UserName: Yup.string()
-      .min(5, `min 5 char`)
-      .max(25, `max 25 char`)
-      .required("field required"),
-    Email: Yup.string()
-      .required("field required")
+  const formSchema = object().shape({
+    Name: string()
+      .min(4, `minimo 4 caracteres`)
+      .max(30, `maximo 30 caracteres`)
+      .required("Campo requerido"),
+    LastName: string()
+      .min(5, `minimo 5 caracteres`)
+      .max(30, `maximo 30 caracteres`)
+      .required("Campo requerido"),
+    Email: string()
+      .required("Campo requerido")
       .email("Correo Electronico invalido")
-      .max(255, `max 255 char`),
-    password: Yup.string().required("field required").min(5, `min 5 char`),
-    RepeatPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Password must match")
-      .required("repeat password is required")
-      .required("field required")
-      .min(5, `min 5 char`),
+      .max(30, `maximo 30 caracteres`),
+    password: string()
+      .required("Por favor ingrese su contrase;a")
+      .matches(
+        /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        "La contrase;a debe contener por lo menso 8 caracteres, uno en Mayuscula, un numero y un caracter especial"
+      ),
+    confirmPassword: string()
+      .required("Por favor confirme su contrase;a")
+      .oneOf([ref("Password")], "Las claves no coinciden"),
 
-    ID: Yup.number().required("field required").min(8, `min  8 char`),
+    ID: number().required("Campo requerido").min(8, `min  8 char`),
   });
   //aqui empieza la estructura
   return (
@@ -39,7 +38,7 @@ const RegisterForm = () => {
           LastName: "",
           UserName: "",
           Password: "",
-          RepeatPassword: "",
+          confirmPassword: "",
           Email: "",
           MobilePhone: "",
         }}
@@ -123,15 +122,15 @@ const RegisterForm = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="RepeatPassword">Repetir contraseña:</label>
+                  <label htmlFor="confirmPassword">Repetir contraseña:</label>
                   <Field
                     className="form-control"
-                    name="RepeatPassword"
+                    name="confirmPassword"
                     placeholder=""
                     type="password"
                   />
                   <ErrorMessage
-                    name="reppassword"
+                    name="confirmPassword"
                     component="div"
                     className="field-error text-danger"
                   />
