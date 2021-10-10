@@ -65,7 +65,7 @@ const LoginFormik = withFormik({
     password: Yup.string().required('Password is required')
   }),
   handleSubmit: (values) => {
-    const REST_API_URL = "YOUR_REST_API_URL";
+    const REST_API_URL = "http://localhost:5000/login";
     fetch(REST_API_URL, {
       method: 'post',
       body: JSON.stringify(values)
