@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 
 const Login = (props) => {
-  const history = useHistory();
+  /* const history = useHistory(); */
   const loginStyle = {
     margin: "32px auto 37px",
     maxWidth: "530px",
@@ -86,6 +86,7 @@ const LoginFormik = withFormik({
     email: Yup.string().email("Email not valid").required("Email is required"),
     password: Yup.string().required("Password is required"),
   }),
+
   handleSubmit: (values) => {
     const REST_API_URL = "http://localhost:5000/login";
     fetch(REST_API_URL, {
@@ -94,7 +95,7 @@ const LoginFormik = withFormik({
     })
       .then((response) => {
         if (response.ok) {
-          this.history.push("/");
+          /* history.push('/User') */
           return response.json();
         } else {
           // HANDLE ERROR
