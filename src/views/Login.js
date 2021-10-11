@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { Link, Redirect, useHistory } from "react-router-dom";
-=======
-import React from "react";
-import { Form, Field, Formik, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { Link, useHistory } from "react-router-dom";
->>>>>>> fd610b5dba7fcacc9fa15401105ef0cb36147b21
 
 const Login = (props) => {
   const history = useHistory();
@@ -20,18 +13,10 @@ const Login = (props) => {
     borderRadius: "10px",
     boxShadow: "0px 0px 10px 10px rgba(0,0,0,0.15)",
   };
-<<<<<<< HEAD
   const { touched, errors } = props;
 
   
   
-=======
-  const formSchema = Yup.object().shape({
-    email: Yup.string().email("Email not valid").required("Email is required"),
-    password: Yup.string().required("Password is required"),
-  });
-
->>>>>>> fd610b5dba7fcacc9fa15401105ef0cb36147b21
   return (
     <Formik
       initialValues={{
@@ -123,7 +108,6 @@ const Login = (props) => {
       </div>
     </Formik>
   );
-<<<<<<< HEAD
 }
 
 const LoginFormik = withFormik({
@@ -158,8 +142,5 @@ const LoginFormik = withFormik({
     });
   }
 })(Login);
-=======
-};
->>>>>>> fd610b5dba7fcacc9fa15401105ef0cb36147b21
 
 export default Login;
