@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
 import { Form, Field, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 
 const Login = (props) => {
+  const { actions } = useContext(Context);
   const history = useHistory();
+  const SaveLocalStore = (profileUser) => {
+    localStorage.setItem("loginUser", JSON.stringify(profileUser));
+  };
   const loginStyle = {
     margin: "32px auto 37px",
     maxWidth: "530px",
@@ -33,6 +38,8 @@ const Login = (props) => {
         })
           .then((response) => {
             if (response.ok) {
+              actions.setProfile(response);
+              SaveLocalStore(response);
               history.push("/User");
               return response.json();
             } else {
