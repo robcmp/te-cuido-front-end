@@ -1,39 +1,110 @@
+<<<<<<< HEAD
 import React from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { Link, Redirect, useHistory } from "react-router-dom";
+=======
+import React from "react";
+import { Form, Field, Formik, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { Link, useHistory } from "react-router-dom";
+>>>>>>> fd610b5dba7fcacc9fa15401105ef0cb36147b21
 
 const Login = (props) => {
+  const history = useHistory();
   const loginStyle = {
     margin: "32px auto 37px",
     maxWidth: "530px",
     background: "#fff",
     padding: "30px",
     borderRadius: "10px",
-    boxShadow: "0px 0px 10px 10px rgba(0,0,0,0.15)"
+    boxShadow: "0px 0px 10px 10px rgba(0,0,0,0.15)",
   };
+<<<<<<< HEAD
   const { touched, errors } = props;
 
   
   
+=======
+  const formSchema = Yup.object().shape({
+    email: Yup.string().email("Email not valid").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
+
+>>>>>>> fd610b5dba7fcacc9fa15401105ef0cb36147b21
   return (
-    <React.Fragment>
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      validationSchema={formSchema}
+      onSubmit={(values) => {
+        const REST_API_URL = "http://localhost:5000/login";
+        fetch(REST_API_URL, {
+          method: "post",
+          body: JSON.stringify(values),
+        })
+          .then((response) => {
+            if (response.ok) {
+              history.push("/User");
+              return response.json();
+            } else {
+              // HANDLE ERROR
+              throw new Error("Something went wrong");
+            }
+          })
+          .then((data) => {
+            // HANDLE RESPONSE DATA
+            console.log(data);
+          })
+          .catch((error) => {
+            // HANDLE ERROR
+            console.log(error);
+          });
+      }}
+    >
       <div className="container">
         <div className="login-wrapper" style={loginStyle}>
-          <div className="d-flex"><h2 className="mx-auto">Bienvenido</h2></div>
+          <div className="d-flex">
+            <h2 className="mx-auto">Bienvenido</h2>
+          </div>
           <Form className="form-container">
             <div className="form-group mt-2">
               <label htmlFor="email">Correo</label>
-              <Field type="text" name="email" className={"form-control"} placeholder="Correo" />
-              {touched.email && errors.email && <span className="help-block text-danger">{errors.email}</span>}
+              <Field
+                type="text"
+                name="email"
+                className={"form-control"}
+                placeholder="Correo"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="help-block text-danger"
+              />
             </div>
             <div className="form-group mt-3">
               <label htmlFor="password">Contraseña</label>
-              <Field type="password" name="password" className={"form-control"} placeholder="Contraseña" />
-              {touched.password && errors.password && <span className="help-block text-danger">{errors.password}</span>}
+              <Field
+                type="password"
+                name="password"
+                className={"form-control"}
+                placeholder="Contraseña"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="help-block text-danger"
+              />
             </div>
             <div className="d-grid gap-2">
-              <button type="submit" className="btn btn-primary btn-large fw-bold mt-4">Iniciar Sesión</button>
+              <button
+                type="submit"
+                className="btn btn-primary btn-large fw-bold mt-4"
+              >
+                Iniciar Sesión
+              </button>
             </div>
             <div className="row mt-4">
               <div className="col-md-8 fw-bold">¿Olvidaste tu contraseña?</div>
@@ -41,7 +112,8 @@ const Login = (props) => {
                 <Link
                   to="/Register"
                   className="btn btn-warning fw-bold"
-                  type="button">
+                  type="button"
+                >
                   Registrarse
                 </Link>
               </div>
@@ -49,8 +121,9 @@ const Login = (props) => {
           </Form>
         </div>
       </div>
-    </React.Fragment>
+    </Formik>
   );
+<<<<<<< HEAD
 }
 
 const LoginFormik = withFormik({
@@ -85,5 +158,8 @@ const LoginFormik = withFormik({
     });
   }
 })(Login);
+=======
+};
+>>>>>>> fd610b5dba7fcacc9fa15401105ef0cb36147b21
 
-export default LoginFormik
+export default Login;
