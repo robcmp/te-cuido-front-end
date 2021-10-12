@@ -1,7 +1,8 @@
 import "./App.css";
+import injectContext from "../src/store/appContext";
 import Layout from "./components/Layout";
 
 function App() {
-  return <Layout/>;
+  return <Layout />;
 }
-export default App;
+export default injectContext(App);
