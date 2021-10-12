@@ -1,13 +1,21 @@
 export const getState = ({ setStore, getStore, getActions }) => {
-    return {
-        store: {
-<<<<<<< HEAD
-            
-=======
-      
->>>>>>> fd610b5dba7fcacc9fa15401105ef0cb36147b21
-        },
-        actions: {                
-            }
-        }
-    }
+  return {
+    store: {
+      login_data: {
+        userLogin: "",
+        userPass: "",
+      },
+      logged_user: {
+        userName: "",
+        email: "",
+        userPass: "",
+        firstName: "",
+        lastName: "",
+        isAdmin: false,
+        bio: "",
+        // auth_token: "",
+      },
+    },
+    actions: {},
+  };
+};

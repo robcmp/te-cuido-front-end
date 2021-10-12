@@ -4,11 +4,7 @@ import Home from "../views/Home";
 import Navbar from "./Navbar";
 import Login from "../views/Login";
 import Register from "./RegisterForm";
-<<<<<<< HEAD
 import injectContext from "../store/appContext";
-=======
-import User from "../views/User";
->>>>>>> fd610b5dba7fcacc9fa15401105ef0cb36147b21
 
 const Layout = () => {
   return (
