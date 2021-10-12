@@ -36,7 +36,7 @@ const Login = (props) => {
         })
           .then((response) => {
             if (response.ok) {
-              // history.push("/User");
+              history.push("/User");
               return response.json();
             } else {
               // HANDLE ERROR
