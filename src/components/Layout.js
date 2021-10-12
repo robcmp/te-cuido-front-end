@@ -4,8 +4,7 @@ import Home from "../views/Home";
 import Navbar from "./Navbar";
 import Login from "../views/Login";
 import Register from "./RegisterForm";
-import injectContext from "../store/appContext";
-
+import User from "../views/User";
 const Layout = () => {
   return (
     <Router>
@@ -30,5 +29,4 @@ const Layout = () => {
     </Router>
   );
 };
-
 export default Layout;

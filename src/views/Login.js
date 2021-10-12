@@ -3,9 +3,8 @@ import { Context } from "../store/appContext";
 import { Form, Field, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
-
 const Login = (props) => {
-  const { actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const history = useHistory();
   const SaveLocalStore = (profileUser) => {
     localStorage.setItem("loginUser", JSON.stringify(profileUser));
@@ -18,10 +17,10 @@ const Login = (props) => {
     borderRadius: "10px",
     boxShadow: "0px 0px 10px 10px rgba(0,0,0,0.15)",
   };
-  const { touched, errors } = props;
-
-  
-  
+  const formSchema = Yup.object().shape({
+    email: Yup.string().email("Email not valid").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
   return (
     <Formik
       initialValues={{
@@ -37,9 +36,7 @@ const Login = (props) => {
         })
           .then((response) => {
             if (response.ok) {
-              actions.setProfile(response);
-              SaveLocalStore(response);
-              history.push("/User");
+              // history.push("/User");
               return response.json();
             } else {
               // HANDLE ERROR
@@ -47,8 +44,11 @@ const Login = (props) => {
             }
           })
           .then((data) => {
-            // HANDLE RESPONSE DATA
+            // actions.setProfile(data);
+            actions.onLogin(data);
             console.log(data);
+            // HANDLE RESPONSE DATA
+            // console.log(data);
           })
           .catch((error) => {
             // HANDLE ERROR
@@ -115,39 +115,5 @@ const Login = (props) => {
       </div>
     </Formik>
   );
-}
-
-const LoginFormik = withFormik({
-  mapPropsToValues: (props) => {
-    return {
-      email: props.email || '',
-      password: props.password || ''
-    }
-  },
-  validationSchema: Yup.object().shape({
-    email: Yup.string().email('Email not valid').required('Email is required'),
-    password: Yup.string().required('Password is required')
-  }),
-  handleSubmit: (values) => {
-    const REST_API_URL = "http://localhost:5000/login";
-    fetch(REST_API_URL, {
-      method: 'post',
-      body: JSON.stringify(values)
-    }).then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        // HANDLE ERROR
-        throw new Error('Something went wrong');
-      }
-    }).then(data => {
-      // HANDLE RESPONSE DATA
-      console.log(data);
-    }).catch((error) => {
-      // HANDLE ERROR
-      console.log(error);
-    });
-  }
-})(Login);
-
+};
 export default Login;
