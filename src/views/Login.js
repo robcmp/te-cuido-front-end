@@ -49,15 +49,9 @@ const Login = (props) => {
             }
           })
           .then((data) => {
-<<<<<<< HEAD
-            // actions.setProfile(data);
-            actions.onLogin(data);
-            console.log(data);
-=======
             saveUserInfo(data);
             actions.setProfile(data);
             // console.log(store);
->>>>>>> b005d3877d690d510a64df30ff6047feb278c077
             // HANDLE RESPONSE DATA
             // console.log(data);
           })
