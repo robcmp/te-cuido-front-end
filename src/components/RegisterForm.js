@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
@@ -8,7 +9,7 @@ const rutRegex = "^([0-9]+-[0-9Kk])$";
 const RegisterForm = (props) => {
   const history = useHistory();
   const formSchema = Yup.object().shape({
-    // photo: Yup.string().oneOf([Yup.ref("photo")]),
+    photo: Yup.string().oneOf([Yup.ref("photo")]),
     name: Yup.string()
       .min(4, `minimo 4 caracteres`)
       .max(30, `maximo 30 caracteres`)
@@ -25,18 +26,17 @@ const RegisterForm = (props) => {
       .required("Por favor ingrese su contrase;a")
       .matches(
         /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-        "La contrase;a debe contener por lo menso 8 caracteres, uno en Mayuscula, un numero y un caracter especial"
+        "La contrase;a debe contener por lo menos 8 caracteres, uno en Mayuscula, un numero y un caracter especial"
       ),
-    // confirmPassword: Yup.string()
-    //   .required("Por favor confirme su contrase;a")
-    //   .oneOf([Yup.ref("Password")], "Las claves no coinciden"),
-
+    confirmPassword: Yup.string()
+      .required("Por favor confirme su contrase;a")
+      .oneOf([Yup.ref("password")], "Las claves deben coincidir"),
     numberID: Yup.string()
       .required("Campo requerido")
       .matches(rutRegex, "RUT invalido"),
-    // IDphoto: Yup.string()
-    //   .oneOf([Yup.ref("IDphoto")])
-    //   .required("Foto requerida"),
+    IDphoto: Yup.string()
+      .oneOf([Yup.ref("IDphoto")])
+      .required("Foto requerida"),
     country: Yup.string().required("Campo requerido"),
     city: Yup.string().required("Campo requerido"),
     phone: Yup.string().required("Campo requerido"),
@@ -48,14 +48,14 @@ const RegisterForm = (props) => {
   return (
     <Formik
       initialValues={{
-        // photo: "",
+        photo: "",
         name: "",
         lastname: "",
         email: "",
         password: "",
-        // confirmPassword: "",
+        confirmPassword: "",
         numberID: "",
-        // IDphoto: "",
+        IDphoto: "",
         country: "",
         city: "",
         phone: "",
@@ -65,10 +65,14 @@ const RegisterForm = (props) => {
       }}
       validationSchema={formSchema}
       onSubmit={(values) => {
+        let values2 = _.omit(values, "confirmPassword", "IDphoto", "photo");
         const REST_API_URL = "http://localhost:5000/user";
         fetch(REST_API_URL, {
           method: "post",
-          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values2),
         })
           .then((response) => {
             if (response.ok) {
@@ -95,7 +99,7 @@ const RegisterForm = (props) => {
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                {/* <div className="form-group">
+                <div className="form-group">
                   <label htmlFor="photo">Foto de Perfil:</label>
                   <input
                     name="photo"
@@ -109,7 +113,7 @@ const RegisterForm = (props) => {
                     component="div"
                     className="field-error text-danger"
                   />
-                </div> */}
+                </div>
                 <div>
                   <label htmlFor="name">Nombres:</label>
                   <Field
@@ -167,7 +171,7 @@ const RegisterForm = (props) => {
                     className="field-error text-danger"
                   />
                 </div>
-                {/* <div className="form-group">
+                <div className="form-group">
                   <label htmlFor="confirmPassword">Repetir contraseña:</label>
                   <Field
                     className="form-control"
@@ -180,7 +184,7 @@ const RegisterForm = (props) => {
                     component="div"
                     className="field-error text-danger"
                   />
-                </div> */}
+                </div>
                 <div className="form-group">
                   <label htmlFor="numberID">DNI:</label>
                   <Field
@@ -195,15 +199,20 @@ const RegisterForm = (props) => {
                     className="field-error text-danger"
                   />
                 </div>
-                {/* <div className="form-group">
+                <div className="form-group">
                   <label htmlFor="IDphoto">DNI foto:</label>
-                  <Field className="form-control" name="IDphoto" type="file" />
+                  <Field
+                    className="form-control"
+                    name="IDphoto"
+                    type="file"
+                    accept="image/*"
+                  />
                   <ErrorMessage
                     name="IDphoto"
                     component="div"
                     className="field-error text-danger"
                   />
-                </div> */}
+                </div>
                 <div className="form-group">
                   <label htmlFor="country">Pais:</label>
                   <Field
