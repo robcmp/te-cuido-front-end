@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 const Login = (props) => {
   const { store, actions } = useContext(Context);
   const history = useHistory();
-  const SaveLocalStore = (profileUser) => {
+  const saveUserInfo = (profileUser) => {
     localStorage.setItem("loginUser", JSON.stringify(profileUser));
   };
   const loginStyle = {
@@ -18,8 +18,10 @@ const Login = (props) => {
     boxShadow: "0px 0px 10px 10px rgba(0,0,0,0.15)",
   };
   const formSchema = Yup.object().shape({
-    email: Yup.string().email("Email not valid").required("Email is required"),
-    password: Yup.string().required("Password is required"),
+    email: Yup.string()
+      .email("Correo no valido")
+      .required("Correo es requerido"),
+    password: Yup.string().required("Contrase;a es requerida"),
   });
   return (
     <Formik
@@ -32,6 +34,9 @@ const Login = (props) => {
         const REST_API_URL = "http://localhost:5000/login";
         fetch(REST_API_URL, {
           method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(values),
         })
           .then((response) => {
@@ -44,9 +49,15 @@ const Login = (props) => {
             }
           })
           .then((data) => {
+<<<<<<< HEAD
             // actions.setProfile(data);
             actions.onLogin(data);
             console.log(data);
+=======
+            saveUserInfo(data);
+            actions.setProfile(data);
+            // console.log(store);
+>>>>>>> b005d3877d690d510a64df30ff6047feb278c077
             // HANDLE RESPONSE DATA
             // console.log(data);
           })
