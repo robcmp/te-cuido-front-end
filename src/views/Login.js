@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { Form, Field, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = (props) => {
   const { store, actions } = useContext(Context);
@@ -46,6 +47,11 @@ const Login = (props) => {
               history.push("/User");
               return response.json();
             } else {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "El correo o contrase;a esta incorrecto",
+              });
               // HANDLE ERROR
               throw new Error("Something went wrong");
             }
