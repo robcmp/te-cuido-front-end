@@ -11,11 +11,9 @@ const RegisterForm = (props) => {
   const formSchema = Yup.object().shape({
     photo: Yup.string().oneOf([Yup.ref("photo")]),
     name: Yup.string()
-      .min(4, `minimo 4 caracteres`)
       .max(30, `maximo 30 caracteres`)
       .required("Campo requerido"),
-    lastname: Yup.string()
-      .min(5, `minimo 5 caracteres`)
+    lastName: Yup.string()
       .max(30, `maximo 30 caracteres`)
       .required("Campo requerido"),
     email: Yup.string()
@@ -31,11 +29,11 @@ const RegisterForm = (props) => {
     confirmPassword: Yup.string()
       .required("Por favor confirme su contrase;a")
       .oneOf([Yup.ref("password")], "Las claves deben coincidir"),
-    numberID: Yup.string()
+    numberId: Yup.string()
       .required("Campo requerido")
       .matches(rutRegex, "RUT invalido"),
-    IDphoto: Yup.string()
-      .oneOf([Yup.ref("IDphoto")])
+    idPhoto: Yup.string()
+      .oneOf([Yup.ref("idPhoto")])
       .required("Foto requerida"),
     country: Yup.string().required("Campo requerido"),
     city: Yup.string().required("Campo requerido"),
@@ -50,12 +48,12 @@ const RegisterForm = (props) => {
       initialValues={{
         photo: "",
         name: "",
-        lastname: "",
+        lastName: "",
         email: "",
         password: "",
         confirmPassword: "",
-        numberID: "",
-        IDphoto: "",
+        numberId: "",
+        idPhoto: "",
         country: "",
         city: "",
         phone: "",
@@ -65,7 +63,7 @@ const RegisterForm = (props) => {
       }}
       validationSchema={formSchema}
       onSubmit={(values) => {
-        let values2 = _.omit(values, "confirmPassword", "IDphoto", "photo");
+        let values2 = _.omit(values, "confirmPassword", "idPhoto", "photo");
         const REST_API_URL = "http://localhost:5000/user";
         fetch(REST_API_URL, {
           method: "post",
@@ -130,15 +128,15 @@ const RegisterForm = (props) => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="lastname">Apellidos:</label>
+                  <label htmlFor="lastName">Apellidos:</label>
                   <Field
                     className="form-control"
-                    name="lastname"
+                    name="lastName"
                     placeholder=""
                     type="text"
                   />
                   <ErrorMessage
-                    name="lastname"
+                    name="lastName"
                     component="div"
                     className="field-error text-danger"
                   />
@@ -186,29 +184,29 @@ const RegisterForm = (props) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="numberID">DNI:</label>
+                  <label htmlFor="numberId">DNI:</label>
                   <Field
                     className="form-control"
-                    name="numberID"
+                    name="numberId"
                     placeholder=""
                     type="string"
                   />
                   <ErrorMessage
-                    name="numberID"
+                    name="numberId"
                     component="div"
                     className="field-error text-danger"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="IDphoto">DNI foto:</label>
+                  <label htmlFor="idPhoto">DNI foto:</label>
                   <Field
                     className="form-control"
-                    name="IDphoto"
+                    name="idPhoto"
                     type="file"
                     accept="image/*"
                   />
                   <ErrorMessage
-                    name="IDphoto"
+                    name="idPhoto"
                     component="div"
                     className="field-error text-danger"
                   />
