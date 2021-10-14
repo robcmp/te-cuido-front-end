@@ -3,9 +3,12 @@ import _ from "lodash";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
+import InputMask from "react-input-mask";
 
 const rutRegex = "^([0-9]+-[0-9Kk])$";
 
+const phoneChile = "/^(+?56)?(s?)(0?9)(s?)[9876543]d{7}$/";
 const RegisterForm = (props) => {
   const history = useHistory();
   const formSchema = Yup.object().shape({
@@ -13,7 +16,7 @@ const RegisterForm = (props) => {
     name: Yup.string()
       .max(30, `maximo 30 caracteres`)
       .required("Campo requerido"),
-    lastName: Yup.string()
+    last_name: Yup.string()
       .max(30, `maximo 30 caracteres`)
       .required("Campo requerido"),
     email: Yup.string()
@@ -29,14 +32,16 @@ const RegisterForm = (props) => {
     confirmPassword: Yup.string()
       .required("Por favor confirme su contrase;a")
       .oneOf([Yup.ref("password")], "Las claves deben coincidir"),
-    numberId: Yup.string()
+    number_id: Yup.string()
       .required("Campo requerido")
       .matches(rutRegex, "RUT invalido"),
-    idPhoto: Yup.string()
-      .oneOf([Yup.ref("idPhoto")])
+    id_photo: Yup.string()
+      .oneOf([Yup.ref("id_photo")])
       .required("Foto requerida"),
     country: Yup.string().required("Campo requerido"),
-    city: Yup.string().required("Campo requerido"),
+    city: Yup.string()
+      .required("Campo requerido")
+      .matches(phoneChile, "Numero de telefono debe empezar +56"),
     phone: Yup.string().required("Campo requerido"),
     occupation: Yup.string().required("Campo requerido"),
     vaccinated: Yup.bool().oneOf([true], "Estar vacunado es requerido"),
@@ -48,12 +53,12 @@ const RegisterForm = (props) => {
       initialValues={{
         photo: "",
         name: "",
-        lastName: "",
+        last_name: "",
         email: "",
         password: "",
         confirmPassword: "",
-        numberId: "",
-        idPhoto: "",
+        number_id: "",
+        id_photo: "",
         country: "",
         city: "",
         phone: "",
@@ -62,8 +67,9 @@ const RegisterForm = (props) => {
         user_type: false,
       }}
       validationSchema={formSchema}
-      onSubmit={(values) => {
-        let values2 = _.omit(values, "confirmPassword", "idPhoto", "photo");
+      onSubmit={(values, { resetForm }) => {
+        let values2 = _.omit(values, "confirmPassword", "id_photo", "photo");
+        console.log(values2);
         const REST_API_URL = "http://localhost:5000/user";
         fetch(REST_API_URL, {
           method: "post",
@@ -74,7 +80,8 @@ const RegisterForm = (props) => {
         })
           .then((response) => {
             if (response.ok) {
-              history.push("/");
+              Swal.fire("Registro exitoso", "", "success");
+              resetForm({ values: "" });
               return response.json();
             } else {
               // HANDLE ERROR
@@ -128,15 +135,15 @@ const RegisterForm = (props) => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="lastName">Apellidos:</label>
+                  <label htmlFor="last_name">Apellidos:</label>
                   <Field
                     className="form-control"
-                    name="lastName"
+                    name="last_name"
                     placeholder=""
                     type="text"
                   />
                   <ErrorMessage
-                    name="lastName"
+                    name="last_name"
                     component="div"
                     className="field-error text-danger"
                   />
@@ -184,29 +191,29 @@ const RegisterForm = (props) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="numberId">DNI:</label>
+                  <label htmlFor="number_id">DNI:</label>
                   <Field
                     className="form-control"
-                    name="numberId"
+                    name="number_id"
                     placeholder=""
                     type="string"
                   />
                   <ErrorMessage
-                    name="numberId"
+                    name="number_id"
                     component="div"
                     className="field-error text-danger"
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="idPhoto">DNI foto:</label>
+                  <label htmlFor="id_photo">DNI foto:</label>
                   <Field
                     className="form-control"
-                    name="idPhoto"
+                    name="id_photo"
                     type="file"
                     accept="image/*"
                   />
                   <ErrorMessage
-                    name="idPhoto"
+                    name="id_photo"
                     component="div"
                     className="field-error text-danger"
                   />
