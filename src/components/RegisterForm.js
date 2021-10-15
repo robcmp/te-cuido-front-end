@@ -4,7 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
-import InputMask from "react-input-mask";
+
 
 const rutRegex = "^([0-9]+-[0-9Kk])$";
 
