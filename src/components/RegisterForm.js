@@ -3,6 +3,8 @@ import _ from "lodash";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
+import SweetAlert from 'react-bootstrap-sweetalert';
+
 
 const rutRegex = "^([0-9]+-[0-9Kk])$";
 
