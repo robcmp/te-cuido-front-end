@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 
-
 const rutRegex = "^([0-9]+-[0-9Kk])$";
 
 const phoneChile = "/^(+?56)?(s?)(0?9)(s?)[9876543]d{7}$/";
@@ -39,9 +38,7 @@ const RegisterForm = (props) => {
       .oneOf([Yup.ref("id_photo")])
       .required("Foto requerida"),
     country: Yup.string().required("Campo requerido"),
-    city: Yup.string()
-      .required("Campo requerido")
-      .matches(phoneChile, "Numero de telefono debe empezar +56"),
+    city: Yup.string().required("Campo requerido"),
     phone: Yup.string().required("Campo requerido"),
     occupation: Yup.string().required("Campo requerido"),
     vaccinated: Yup.bool().oneOf([true], "Estar vacunado es requerido"),
@@ -69,7 +66,6 @@ const RegisterForm = (props) => {
       validationSchema={formSchema}
       onSubmit={(values, { resetForm }) => {
         let values2 = _.omit(values, "confirmPassword", "id_photo", "photo");
-        console.log(values2);
         const REST_API_URL = "http://localhost:5000/user";
         fetch(REST_API_URL, {
           method: "post",
@@ -82,22 +78,37 @@ const RegisterForm = (props) => {
             if (response.ok) {
               Swal.fire("Registro exitoso", "", "success");
               resetForm({ values: "" });
-              return response.json();
+              // return response.json();
             } else {
               // HANDLE ERROR
-              throw new Error("Something went wrong");
+              if (response.status === 460) {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "El correo esta siendo utilizado",
+                });
+              }
+              if (response.status === 461) {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "El DNI esta siendo utilizado",
+                });
+              }
+              // throw new Error("Something went wrong");
             }
           })
           .then((data) => {
             // HANDLE RESPONSE DATA
-            console.log(data);
+            // console.log(data);
           })
           .catch((error) => {
             // HANDLE ERROR
             console.log(error);
           });
-        console.log(JSON.stringify(values));
+        // console.log(JSON.stringify(values));
       }}
+      on
     >
       {(formsProps) => (
         <Form>
