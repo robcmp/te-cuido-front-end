@@ -1,7 +1,8 @@
 import React from "react";
+import Profile from "../components/Profile";
 
 const User = () => {
-  return <h1>Hola User</h1>;
+  return <Profile/>;
 };
 
 export default User;
