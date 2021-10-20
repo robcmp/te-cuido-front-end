@@ -210,9 +210,9 @@ const RegisterForm = (props) => {
                     name="number_id"
                     placeholder=""
                     type="string"
-                    onChange={(event) => {
-                      console.log(event.target.value);
-                    }}
+                    // onChange={(event) => {
+                    //   console.log(event.target.value);
+                    // }}
                   />
                   <ErrorMessage
                     name="number_id"
