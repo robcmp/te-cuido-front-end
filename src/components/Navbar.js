@@ -31,38 +31,6 @@ const Navbar = () => {
                 Link
               </a>
             </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="/#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li>
-                  <a className="dropdown-item" href="/#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
-            </li>
           </ul>
           <div className="d-flex">
             <Link
@@ -76,10 +44,10 @@ const Navbar = () => {
             <Link
               to="/Register"
               className="btn btn-warning fw-bold"
-              type="button">
+              type="button"
+            >
               Registrarse
             </Link>
-
           </div>
         </div>
       </div>
