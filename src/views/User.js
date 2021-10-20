@@ -1,8 +1,17 @@
 import React from "react";
-import Profile from "../components/Profile";
+import SidebarUser from "../components/SidebarUser";
 
 const User = () => {
-  return <Profile/>;
+  return (
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-4">
+          <SidebarUser />
+        </div>
+        <div className="col-md-8"></div>
+      </div>
+    </div>
+  );
 };
 
 export default User;
