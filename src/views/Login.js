@@ -23,7 +23,7 @@ const Login = (props) => {
     email: Yup.string()
       .email("Correo no valido")
       .required("Correo es requerido"),
-    password: Yup.string().required("Contrase;a es requerida"),
+    password: Yup.string().required("Contraseña es requerida"),
   });
   return (
     <Formik
@@ -49,7 +49,7 @@ const Login = (props) => {
               Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "El correo o contrase;a esta incorrecto",
+                text: "Usuario o contraseña invalida",
               });
               // HANDLE ERROR
               throw new Error("Something went wrong");

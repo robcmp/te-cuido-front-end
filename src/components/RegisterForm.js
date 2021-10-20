@@ -4,36 +4,36 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import useRut from "use-rut";
 
 const rutRegex = "^([0-9]+-[0-9Kk])$";
-
 const phoneChile = "/^(+?56)?(s?)(0?9)(s?)[9876543]d{7}$/";
 const RegisterForm = (props) => {
   const history = useHistory();
   const formSchema = Yup.object().shape({
     photo: Yup.string().oneOf([Yup.ref("photo")]),
     name: Yup.string()
-      .max(30, `maximo 30 caracteres`)
+      .max(30, `máximo 30 caracteres`)
       .required("Campo requerido"),
     last_name: Yup.string()
-      .max(30, `maximo 30 caracteres`)
+      .max(30, `máximo 30 caracteres`)
       .required("Campo requerido"),
     email: Yup.string()
       .required("Campo requerido")
-      .email("Correo Electronico invalido")
-      .max(30, `maximo 30 caracteres`),
+      .email("Correo electrónico invalido")
+      .max(30, `máximo 30 caracteres`),
     password: Yup.string()
-      .required("Por favor ingrese su contrase;a")
+      .required("Por favor ingrese su contraseña")
       .matches(
         /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-        "La contrase;a debe contener por lo menos 8 caracteres, uno en Mayuscula, un numero y un caracter especial"
+        "La contraseña debe contener por lo menos 8 caracteres, uno en mayúscula, un número y un caracter especial"
       ),
     confirmPassword: Yup.string()
-      .required("Por favor confirme su contrase;a")
-      .oneOf([Yup.ref("password")], "Las claves deben coincidir"),
+      .required("Por favor confirme su contraseña")
+      .oneOf([Yup.ref("password")], "Las contraseñas deben coincidir"),
     number_id: Yup.string()
       .required("Campo requerido")
-      .matches(rutRegex, "RUT invalido"),
+      .matches(rutRegex, "RUT inválido"),
     id_photo: Yup.string()
       .oneOf([Yup.ref("id_photo")])
       .required("Foto requerida"),
@@ -85,14 +85,14 @@ const RegisterForm = (props) => {
                 Swal.fire({
                   icon: "error",
                   title: "Oops...",
-                  text: "El correo esta siendo utilizado",
+                  text: "El correo está siendo utilizado",
                 });
               }
               if (response.status === 461) {
                 Swal.fire({
                   icon: "error",
                   title: "Oops...",
-                  text: "El DNI esta siendo utilizado",
+                  text: "El DNI está siendo utilizado",
                 });
               }
               // throw new Error("Something went wrong");
@@ -108,7 +108,9 @@ const RegisterForm = (props) => {
           });
         // console.log(JSON.stringify(values));
       }}
-      on
+      onChange={(values) => {
+        console.log(values);
+      }}
     >
       {(formsProps) => (
         <Form>
@@ -208,6 +210,9 @@ const RegisterForm = (props) => {
                     name="number_id"
                     placeholder=""
                     type="string"
+                    onChange={(event) => {
+                      console.log(event.target.value);
+                    }}
                   />
                   <ErrorMessage
                     name="number_id"
@@ -230,7 +235,7 @@ const RegisterForm = (props) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="country">Pais:</label>
+                  <label htmlFor="country">País:</label>
                   <Field
                     className="form-control"
                     name="country"
@@ -258,7 +263,7 @@ const RegisterForm = (props) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="phone">Telefono:</label>
+                  <label htmlFor="phone">Teléfono:</label>
                   <Field
                     className="form-control"
                     name="phone"
@@ -272,7 +277,7 @@ const RegisterForm = (props) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="Occupation">Ocupacion:</label>
+                  <label htmlFor="Occupation">Ocupación:</label>
                   <Field
                     className="form-control"
                     name="occupation"
