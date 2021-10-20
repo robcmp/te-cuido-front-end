@@ -1,6 +1,6 @@
 import React from "react";
 import { slide as Menu } from "react-burger-menu";
-import "../styles/sidebartest.css";
+import "../styles/sidebarAdmin.css";
 
 const SidebarAdmin = (props) => {
   // const clickToggle = () => {
