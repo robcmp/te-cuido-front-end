@@ -4,9 +4,9 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import useRut from "use-rut";
 
 const rutRegex = "^([0-9]+-[0-9Kk])$";
-
 const phoneChile = "/^(+?56)?(s?)(0?9)(s?)[9876543]d{7}$/";
 const RegisterForm = (props) => {
   const history = useHistory();
@@ -108,7 +108,9 @@ const RegisterForm = (props) => {
           });
         // console.log(JSON.stringify(values));
       }}
-      on
+      onChange={(values) => {
+        console.log(values);
+      }}
     >
       {(formsProps) => (
         <Form>
@@ -208,6 +210,9 @@ const RegisterForm = (props) => {
                     name="number_id"
                     placeholder=""
                     type="string"
+                    onChange={(event) => {
+                      console.log(event.target.value);
+                    }}
                   />
                   <ErrorMessage
                     name="number_id"
