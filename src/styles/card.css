@@ -1,0 +1,11 @@
+.scrolling-wrapper{
+	overflow-x: auto;
+}
+
+.test {
+  background-color: red;
+}
+
+.borders {
+    border-color: black;
+}
