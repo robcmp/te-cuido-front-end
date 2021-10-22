@@ -16,16 +16,16 @@ const Layout = () => {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/Login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route exact path="/User">
+          <Route exact path="/user">
             <User />
           </Route>
-          <Route exact path="/Register">
+          <Route exact path="/register">
             <Register />
           </Route>
-          <Route exact path="/Admin">
+          <Route exact path="/admin">
             <Admin />
           </Route>
           <Route render={() => <h1>Not found</h1>}></Route>
