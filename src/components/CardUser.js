@@ -7,17 +7,17 @@ import Swal from "sweetalert2";
 const CardUser = (props) => {
   const banConfirmation = () => {
     Swal.fire({
-      title: "Do you want to save the changes?",
+      title: "Usted quiere banear este usuario?",
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: "Save",
-      denyButtonText: `Don't save`,
+      confirmButtonText: "Si",
+      denyButtonText: `No banear`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success");
+        Swal.fire("Usuario baneado", "", "success");
       } else if (result.isDenied) {
-        Swal.fire("Changes are not saved", "", "info");
+        Swal.fire("Usuario no ha sido baneado", "", "info");
       }
     });
   };
