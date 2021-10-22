@@ -6,7 +6,11 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="/#">
-          Navbar
+          <img
+            src="https://placeholder.pics/svg/150x50/888888/EEE/Logo"
+            alt="..."
+            height="36"
+          />
         </a>
         <button
           className="navbar-toggler"
@@ -34,7 +38,7 @@ const Navbar = () => {
           </ul>
           <div className="d-flex">
             <Link
-              to="/Login"
+              to="/login"
               className="btn btn-primary me-4 fw-bold"
               type="button"
             >
@@ -42,7 +46,7 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="/Register"
+              to="/register"
               className="btn btn-warning fw-bold"
               type="button"
             >
