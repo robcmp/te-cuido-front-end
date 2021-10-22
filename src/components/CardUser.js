@@ -1,7 +1,7 @@
 import React from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
-import "../styles/card.css";
+import "../styles/cardUser.css";
 import Swal from "sweetalert2";
 
 const CardUser = (props) => {
