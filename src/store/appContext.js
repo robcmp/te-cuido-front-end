@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getState } from "./flux";
-
 export const Context = React.createContext(null);
-
 const injectContext = (PassedComponent) => {
   const StoreWrapper = (props) => {
     const [state, setState] = useState(
@@ -16,9 +14,7 @@ const injectContext = (PassedComponent) => {
           }),
       })
     );
-
     useEffect(() => {}, []);
-
     return (
       <Context.Provider value={state}>
         <PassedComponent {...props} />
@@ -27,5 +23,4 @@ const injectContext = (PassedComponent) => {
   };
   return StoreWrapper;
 };
-
 export default injectContext;

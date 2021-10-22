@@ -7,8 +7,8 @@ const Admin = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div id="outer-container">
-          <div className="col-md-2">
+        <div id="outer-container" >
+          <div className="col-md-2" >
             <SidebarAdmin
               pageWrapId={"page-wrap"}
               outerContainerId={"outer-container"}

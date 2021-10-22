@@ -25,7 +25,6 @@ const Login = (props) => {
       .required("Correo es requerido"),
     password: Yup.string().required("Contraseña es requerida"),
   });
-
   return (
     <Formik
       initialValues={{
@@ -129,5 +128,5 @@ const Login = (props) => {
     </Formik>
   );
 };
-
 export default Login;
+
