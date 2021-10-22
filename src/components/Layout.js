@@ -34,5 +34,4 @@ const Layout = () => {
     </Router>
   );
 };
-
 export default Layout;
