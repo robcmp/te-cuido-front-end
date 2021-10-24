@@ -1,5 +1,4 @@
 import React from "react";
-import Profile1 from "../components/Profile1";
 import SidebarUser from "../components/SidebarUser";
 import { useEffect, useState} from "react";
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from '../store/appContext';
 import { Link, useParams} from 'react-router-dom';
+import SidebarUser from "../components/SidebarUser";
+
 
 const Profile = () => {
 
