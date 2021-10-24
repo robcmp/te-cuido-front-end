@@ -42,7 +42,7 @@ const RegisterForm = (props) => {
     phone: Yup.string().required("Campo requerido"),
     occupation: Yup.string().required("Campo requerido"),
     vaccinated: Yup.bool().oneOf([true], "Estar vacunado es requerido"),
-    user_type: Yup.bool(),
+    role: Yup.bool(),
   });
 
   return (
@@ -61,7 +61,7 @@ const RegisterForm = (props) => {
         phone: "",
         occupation: "",
         vaccinated: false,
-        user_type: false,
+        role: "",
       }}
       validationSchema={formSchema}
       onSubmit={(values, { resetForm }) => {
@@ -309,15 +309,15 @@ const RegisterForm = (props) => {
                 <div>
                   <Field
                     type="checkbox"
-                    name="user_type"
+                    name="role"
                     className="form-check-input"
                   />
-                  <label htmlFor="user_type" className="form-check-label">
+                  <label htmlFor="role" className="form-check-label">
                     Cuidador
                   </label>
 
                   <ErrorMessage
-                    name="user_type"
+                    name="role"
                     component="div"
                     className="invalid-feedback"
                   />
