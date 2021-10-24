@@ -15,7 +15,7 @@ export const getState = ({ setStore, getStore, getActions }) => {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                actions.getInfo(data);
+                actions.setProfile(data);
             })
     },
 

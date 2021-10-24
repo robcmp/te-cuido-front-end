@@ -6,10 +6,16 @@ const SidebarUser = () => {
   return (
     <Menu>
       <a className="menu-item" href="/">
-        <i class="bi bi-person-square"></i> Lista de Usuarios
+        <i className="bi bi-person-square"></i> Información Personal
       </a>
       <a className="menu-item" href="/salads">
-        <i class="bi bi-cart-dash"></i> Test
+        <i className="fas fa-times"></i>Publicación de Servicios
+      </a>
+      <a className="menu-item" href="/salads">
+        <i className="bi bi-cart-dash"></i> Pendientes/Aceptados
+      </a>
+      <a className="menu-item" href="/salads">
+        <i className="bi bi-cart-dash"></i> lista de Servicios
       </a>
     </Menu>
   );

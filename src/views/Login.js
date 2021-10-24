@@ -43,7 +43,7 @@ const Login = (props) => {
         })
           .then((response) => {
             if (response.ok) {
-              history.push("/User");
+              //history.push("/user");
               return response.json();
             } else {
               Swal.fire({
@@ -56,11 +56,16 @@ const Login = (props) => {
             }
           })
           .then((data) => {
+            if (data.user !== ""){
             saveUserInfo(data);
             actions.setProfile(data);
+            localStorage.setItem("isAuth", JSON.stringify(true));
+            localStorage.setItem("access_token", JSON.stringify(data.access_token));
+            history.push("/user");
             // console.log(store);
             // HANDLE RESPONSE DATA
             // console.log(data);
+            }
           })
           .catch((error) => {
             // HANDLE ERROR

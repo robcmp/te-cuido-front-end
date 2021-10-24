@@ -6,6 +6,7 @@ import Login from "../views/Login";
 import Register from "./RegisterForm";
 import User from "../views/User";
 import Admin from "../views/Admin";
+import PrivateRoute from "./PrivateRoute";
 
 const Layout = () => {
   return (
@@ -19,9 +20,7 @@ const Layout = () => {
           <Route exact path="/login">
             <Login />
           </Route>
-          <Route exact path="/user">
-            <User />
-          </Route>
+          <PrivateRoute exact path="/user" component={()=> <User />}/>
           <Route exact path="/register">
             <Register />
           </Route>
