@@ -9,24 +9,11 @@ import { Link, useParams} from 'react-router-dom';
 const rutRegex = "^([0-9]+-[0-9Kk])$";
 
 const phoneChile = "/^(+?56)?(s?)(0?9)(s?)[9876543]d{7}$/";
+
 const Profile1 = () => {
 
-    const { store, actions } = useContext(Context);
-    /* const params = useParams(); */
-
-    useEffect(() => {
-        actions.getPeopleinfo(1)
-    }, [])
-
-    /* const { store, actions } = useContext(Context);
-
-    const [login , setLogin] = useState();
-
-    useEffect(() => {
-       setLogin(store)
-    }, []) */
-  
- /*    console.log(login.profileUser.name); */
+    const welcome = JSON.parse(localStorage.getItem("loginUser"));
+    console.log(welcome);
 
     const formSchema = Yup.object().shape({
         photo: Yup.string().oneOf([Yup.ref("photo")]),
@@ -67,19 +54,19 @@ const Profile1 = () => {
         <Formik
             initialValues={{
                 photo: "",
-                name: store.details.name,
-                last_name: store.details.last_name,
-                email: "",
+                name: welcome.user.name,
+                last_name: welcome.user.last_name,
+                email: welcome.user.email,
                 password: "",
                 confirmPassword: "",
-                number_id: "",
+                number_id: welcome.user.number_id,
                 id_photo: "",
-                country: "",
-                city: "",
-                phone: "",
-                occupation: "",
-                vaccinated: "",
-                user_type: "",
+                country: welcome.user.country,
+                city: welcome.user.city,
+                phone: welcome.user.phone,
+                occupation: welcome.user.occupation,
+                vaccinated: welcome.user.vaccinated,
+                role: welcome.user.role
             }}
             validationSchema={formSchema}
         /* onSubmit={} */
