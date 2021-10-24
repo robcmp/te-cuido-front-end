@@ -9,7 +9,7 @@ const SidebarUser = () => {
         <i className="bi bi-person-square"></i> Información Personal
       </a>
       <a className="menu-item" href="/salads">
-        <i className="fas fa-times"></i>Publicación de Servicios
+        <i className="bi bi-cart-dash"></i>Publicación de Servicios
       </a>
       <a className="menu-item" href="/salads">
         <i className="bi bi-cart-dash"></i> Pendientes/Aceptados
