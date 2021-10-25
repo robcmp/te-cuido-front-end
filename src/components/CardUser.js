@@ -14,8 +14,9 @@ const CardUser = (props) => {
       console.log("Dentro del If");
       setBanned(false);
     }
-  }, []);
-  const banConfirmation = (e) => {
+  }, [props.is_active]);
+
+  const banConf = (e) => {
     Swal.fire({
       title: "Usted quiere banear este usuario?",
       showDenyButton: true,
@@ -30,46 +31,101 @@ const CardUser = (props) => {
         Swal.fire("Usuario no ha sido baneado", "", "info");
       }
     });
+  };
 
-    const banUser = (id) => {
-      const REST_API_URL = `http://localhost:5000/banuser/${id}`;
-      const body = { is_active: false };
-      fetch(REST_API_URL, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      })
-        .then((response) => {
-          if (response.ok) {
-            // return response.json();
-            Swal.fire("Usuario baneado", "", "success");
-            setBanned(true);
-            console.log(isBanned);
-          } else if (response.status === 404) {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Usuario ya fue baneado",
-            });
-          }
-        })
-        .then((data) => {
-          // HANDLE RESPONSE DATA
-          // console.log(data);
-        })
-        .catch((error) => {
-          // HANDLE ERROR
+  const banUser = (id) => {
+    const REST_API_URL = `http://localhost:5000/banuser/${id}`;
+    const body = { is_active: false };
+    fetch(REST_API_URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // return response.json();
+          Swal.fire("Usuario baneado", "", "success");
+          setBanned(true);
+          console.log(isBanned);
+        } else if (response.status === 404) {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Usuario ya fue baneado",
           });
-          console.log(error);
+        }
+      })
+      .then((data) => {
+        // HANDLE RESPONSE DATA
+        // console.log(data);
+      })
+      .catch((error) => {
+        // HANDLE ERROR
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Usuario ya fue baneado",
         });
-    };
+        console.log(error);
+      });
   };
+
+  const deleteConf = (e) => {
+    Swal.fire({
+      title: "Usted quiere borrar este usuario?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      denyButtonText: `No borrar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        handleRemove(e.target.id);
+      } else if (result.isDenied) {
+        Swal.fire("Usuario no ha sido borrado", "", "info");
+      }
+    });
+  };
+
+  const handleRemove = (id) => {
+    const REST_API_URL = `http://localhost:5000/delete_user/${id}`;
+    fetch(REST_API_URL, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          // return response.json();
+          Swal.fire("Usuario borrado", "", "success");
+          setBanned(true);
+          console.log(isBanned);
+        } else if (response.status === 404) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Usuario ya fue baneado",
+          });
+        }
+      })
+      .then((data) => {
+        // HANDLE RESPONSE DATA
+        // console.log(data);
+      })
+      .catch((error) => {
+        // HANDLE ERROR
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Usuario ya fue borrado",
+        });
+        console.log(error);
+      });
+  };
+  
   return (
     <>
       <div className="card scrolling-wrapper borders">
@@ -84,7 +140,7 @@ const CardUser = (props) => {
                 <button
                   className="btn btn-primary"
                   id={props.data.id}
-                  onClick={banConfirmation}
+                  onClick={banConf}
                   name="unban"
                 >
                   {" "}
@@ -94,7 +150,7 @@ const CardUser = (props) => {
                 <button
                   className="btn btn-primary"
                   id={props.data.id}
-                  onClick={banConfirmation}
+                  onClick={banConf}
                   name="ban"
                 >
                   {" "}
@@ -103,7 +159,7 @@ const CardUser = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <button className="btn btn-primary"> DELETE </button>
+              <button className="btn btn-primary" id={props.data.id} onClick={deleteConf}> DELETE </button>
             </div>
             <div className="d-flex">
               <button
