@@ -21,5 +21,4 @@ const SidebarUser = () => {
     </Menu>
   );
 };
-
 export default SidebarUser;
