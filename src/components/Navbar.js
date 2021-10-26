@@ -3,14 +3,10 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="/#">
-          <img
-            src="https://placeholder.pics/svg/150x50/888888/EEE/Logo"
-            alt="..."
-            height="36"
-          />
+          <img src="../images/tecuido.jpg" alt="..." height="36" />
         </a>
         <button
           className="navbar-toggler"
