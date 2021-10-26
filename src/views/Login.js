@@ -53,7 +53,7 @@ const Login = (props) => {
                 text: "Usuario o contraseña invalida",
               });
               // HANDLE ERROR
-              throw new Error("Something went wrong");
+                                throw new Error("Something went wrong");
             }
           })
           .then((data) => {

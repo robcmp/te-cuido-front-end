@@ -6,7 +6,7 @@ import Login from "../views/Login";
 import Register from "./RegisterForm";
 import User from "../views/User";
 import Admin from "../views/Admin";
-
+import Services from "../views/Service"
 const Layout = () => {
   return (
     <Router>
@@ -25,9 +25,13 @@ const Layout = () => {
           <Route exact path="/Register">
             <Register />
           </Route>
+          <Route exact path="/Services">
+            <Services />
+          </Route>
           <Route exact path="/Admin">
             <Admin />
           </Route>
+          
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
       </div>
