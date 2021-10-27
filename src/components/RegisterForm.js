@@ -80,8 +80,6 @@ const RegisterForm = (props) => {
                 values2.role === false
                   ? (values2.role = 3)
                   : (values2.role = 2);
-
-                console.log(JSON.stringify(values2));
                 const REST_API_URL = "http://localhost:5000/register";
                 fetch(REST_API_URL, {
                   method: "post",
