@@ -6,7 +6,12 @@ const Navbar = () => {
     <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="/#">
-          <img src="../images/tecuido.jpg" alt="..." height="36" />
+          <img
+            src="https://i.ibb.co/J7Lxj1X/logo.jpg"
+            width="80"
+            alt=""
+            class="d-inline-block align-middle mr-2"
+          />
         </a>
         <button
           className="navbar-toggler"
