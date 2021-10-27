@@ -125,7 +125,7 @@ const CardUser = (props) => {
         console.log(error);
       });
   };
-  
+
   return (
     <>
       <div className="card scrolling-wrapper borders">
@@ -159,7 +159,14 @@ const CardUser = (props) => {
               )}
             </div>
             <div className="d-flex">
-              <button className="btn btn-primary" id={props.data.id} onClick={deleteConf}> DELETE </button>
+              <button
+                className="btn btn-primary"
+                id={props.data.id}
+                onClick={deleteConf}
+              >
+                {" "}
+                DELETE{" "}
+              </button>
             </div>
             <div className="d-flex">
               <button

@@ -22,6 +22,7 @@ const RegisterForm = (props) => {
       .required("Campo requerido")
       .email("Correo electrónico invalido")
       .max(30, `máximo 30 caracteres`),
+    birth_date: Yup.date().required("Campo requerido"),
     password: Yup.string()
       .required("Por favor ingrese su contraseña")
       .matches(
@@ -46,302 +47,337 @@ const RegisterForm = (props) => {
   });
 
   return (
-    <Formik
-      initialValues={{
-        photo: "",
-        name: "",
-        last_name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        number_id: "",
-        id_photo: "",
-        country: "",
-        city: "",
-        phone: "",
-        occupation: "",
-        vaccinated: false,
-        role: "",
-      }}
-      validationSchema={formSchema}
-      onSubmit={(values, { resetForm }) => {
-        let values2 = _.omit(values, "confirmPassword", "id_photo", "photo");
-        const REST_API_URL = "http://localhost:5000/user";
-        fetch(REST_API_URL, {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values2),
-        })
-          .then((response) => {
-            if (response.ok) {
-              Swal.fire("Registro exitoso", "", "success");
-              resetForm({ values: "" });
-              // return response.json();
-            } else {
-              // HANDLE ERROR
-              if (response.status === 460) {
-                Swal.fire({
-                  icon: "error",
-                  title: "Oops...",
-                  text: "El correo está siendo utilizado",
-                });
-              }
-              if (response.status === 461) {
-                Swal.fire({
-                  icon: "error",
-                  title: "Oops...",
-                  text: "El DNI está siendo utilizado",
-                });
-              }
-              // throw new Error("Something went wrong");
-            }
-          })
-          .then((data) => {
-            // HANDLE RESPONSE DATA
-            // console.log(data);
-          })
-          .catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
-          });
-        // console.log(JSON.stringify(values));
-      }}
-      onChange={(values) => {
-        console.log(values);
-      }}
-    >
-      {(formsProps) => (
-        <Form>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label htmlFor="photo">Foto de Perfil:</label>
-                  <input
-                    name="photo"
-                    type="file"
-                    onChange={(event) => {
-                      formsProps.setFieldValue("photo", event.target.files[0]);
-                    }}
-                  />
-                  <ErrorMessage
-                    name="photo"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="name">Nombres:</label>
-                  <Field
-                    className="form-control"
-                    name="name"
-                    placeholder=""
-                    type="text"
-                  />
-                  <ErrorMessage
-                    name="name"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
+    <div className="mt-5 pt-5">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <Formik
+              initialValues={{
+                photo: "",
+                name: "",
+                last_name: "",
+                email: "",
+                birth_date: "",
+                password: "",
+                confirmPassword: "",
+                number_id: "",
+                id_photo: "",
+                country: "",
+                city: "",
+                phone: "",
+                occupation: "",
+                vaccinated: false,
+                role: "",
+              }}
+              validationSchema={formSchema}
+              onSubmit={(values, { resetForm }) => {
+                let values2 = _.omit(
+                  values,
+                  "confirmPassword",
+                  "id_photo",
+                  "photo"
+                );
+                console.log(values2);
+                values2.role === false
+                  ? (values2.role = 3)
+                  : (values2.role = 2);
 
-                <div className="form-group">
-                  <label htmlFor="last_name">Apellidos:</label>
-                  <Field
-                    className="form-control"
-                    name="last_name"
-                    placeholder=""
-                    type="text"
-                  />
-                  <ErrorMessage
-                    name="last_name"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Correo:</label>
-                  <Field
-                    className="form-control"
-                    name="email"
-                    placeholder=""
-                    type="email"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Contraseña:</label>
-                  <Field
-                    className="form-control"
-                    name="password"
-                    placeholder=""
-                    type="password"
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="confirmPassword">Repetir contraseña:</label>
-                  <Field
-                    className="form-control"
-                    name="confirmPassword"
-                    placeholder=""
-                    type="password"
-                  />
-                  <ErrorMessage
-                    name="confirmPassword"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="number_id">DNI:</label>
-                  <Field
-                    className="form-control"
-                    name="number_id"
-                    placeholder=""
-                    type="string"
-                    // onChange={(event) => {
-                    //   console.log(event.target.value);
-                    // }}
-                  />
-                  <ErrorMessage
-                    name="number_id"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="id_photo">DNI foto:</label>
-                  <Field
-                    className="form-control"
-                    name="id_photo"
-                    type="file"
-                    accept="image/*"
-                  />
-                  <ErrorMessage
-                    name="id_photo"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="country">País:</label>
-                  <Field
-                    className="form-control"
-                    name="country"
-                    placeholder=""
-                    type="string"
-                  />
-                  <ErrorMessage
-                    name="country"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="city">Ciudad:</label>
-                  <Field
-                    className="form-control"
-                    name="city"
-                    placeholder=""
-                    type="string"
-                  />
-                  <ErrorMessage
-                    name="city"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone">Teléfono:</label>
-                  <Field
-                    className="form-control"
-                    name="phone"
-                    placeholder=""
-                    type="string"
-                  />
-                  <ErrorMessage
-                    name="phone"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="Occupation">Ocupación:</label>
-                  <Field
-                    className="form-control"
-                    name="occupation"
-                    placeholder=""
-                    type="string"
-                  />
-                  <ErrorMessage
-                    name="occupation"
-                    component="div"
-                    className="field-error text-danger"
-                  />
-                </div>
-                <div>
-                  <Field
-                    type="checkbox"
-                    name="vaccinated"
-                    className="form-check-input"
-                  />
-                  <label htmlFor="vaccinated" className="form-check-label">
-                    Vacunado
-                  </label>
+                console.log(values2);
+                const REST_API_URL = "http://localhost:5000/user";
+                fetch(REST_API_URL, {
+                  method: "post",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(values2),
+                })
+                  .then((response) => {
+                    if (response.ok) {
+                      Swal.fire("Registro exitoso", "", "success");
+                      resetForm({ values: "" });
+                      // return response.json();
+                    } else {
+                      // HANDLE ERROR
+                      if (response.status === 460) {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: "El correo está siendo utilizado",
+                        });
+                      }
+                      if (response.status === 461) {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: "El DNI está siendo utilizado",
+                        });
+                      }
+                      // throw new Error("Something went wrong");
+                    }
+                  })
+                  .then((data) => {
+                    // HANDLE RESPONSE DATA
+                    // console.log(data);
+                  })
+                  .catch((error) => {
+                    // HANDLE ERROR
+                    console.log(error);
+                  });
+                // console.log(JSON.stringify(values));
+              }}
+              onChange={(values) => {
+                console.log(values);
+              }}
+            >
+              {(formsProps) => (
+                <Form>
+                  <div className="form-group">
+                    <label htmlFor="photo">Foto de Perfil:</label>
+                    <input
+                      name="photo"
+                      type="file"
+                      onChange={(event) => {
+                        formsProps.setFieldValue(
+                          "photo",
+                          event.target.files[0]
+                        );
+                      }}
+                    />
+                    <ErrorMessage
+                      name="photo"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="name">Nombres:</label>
+                    <Field
+                      className="form-control"
+                      name="name"
+                      placeholder=""
+                      type="text"
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
 
-                  <ErrorMessage
-                    name="vaccinated"
-                    component="div"
-                    className="invalid-feedback"
-                  />
-                </div>
-                <div>
-                  <Field
-                    type="checkbox"
-                    name="role"
-                    className="form-check-input"
-                  />
-                  <label htmlFor="role" className="form-check-label">
-                    Cuidador
-                  </label>
+                  <div className="form-group">
+                    <label htmlFor="last_name">Apellidos:</label>
+                    <Field
+                      className="form-control"
+                      name="last_name"
+                      placeholder=""
+                      type="text"
+                    />
+                    <ErrorMessage
+                      name="last_name"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Correo:</label>
+                    <Field
+                      className="form-control"
+                      name="email"
+                      placeholder=""
+                      type="email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Fecha de Nacimiento:</label>
+                    <Field
+                      className="form-control"
+                      name="birth_date"
+                      placeholder=""
+                      type="date"
+                    />
+                    <ErrorMessage
+                      name="birth_date"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password">Contraseña:</label>
+                    <Field
+                      className="form-control"
+                      name="password"
+                      placeholder=""
+                      type="password"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="confirmPassword">Repetir contraseña:</label>
+                    <Field
+                      className="form-control"
+                      name="confirmPassword"
+                      placeholder=""
+                      type="password"
+                    />
+                    <ErrorMessage
+                      name="confirmPassword"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="number_id">DNI:</label>
+                    <Field
+                      className="form-control"
+                      name="number_id"
+                      placeholder=""
+                      type="string"
+                      // onChange={(event) => {
+                      //   console.log(event.target.value);
+                      // }}
+                    />
+                    <ErrorMessage
+                      name="number_id"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="id_photo">DNI foto:</label>
+                    <Field
+                      className="form-control"
+                      name="id_photo"
+                      type="file"
+                      accept="image/*"
+                    />
+                    <ErrorMessage
+                      name="id_photo"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="country">País:</label>
+                    <Field
+                      className="form-control"
+                      name="country"
+                      placeholder=""
+                      type="string"
+                    />
+                    <ErrorMessage
+                      name="country"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="city">Ciudad:</label>
+                    <Field
+                      className="form-control"
+                      name="city"
+                      placeholder=""
+                      type="string"
+                    />
+                    <ErrorMessage
+                      name="city"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Teléfono:</label>
+                    <Field
+                      className="form-control"
+                      name="phone"
+                      placeholder=""
+                      type="string"
+                    />
+                    <ErrorMessage
+                      name="phone"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="Occupation">Ocupación:</label>
+                    <Field
+                      className="form-control"
+                      name="occupation"
+                      placeholder=""
+                      type="string"
+                    />
+                    <ErrorMessage
+                      name="occupation"
+                      component="div"
+                      className="field-error text-danger"
+                    />
+                  </div>
+                  <div>
+                    <Field
+                      type="checkbox"
+                      name="vaccinated"
+                      className="form-check-input"
+                    />
+                    <label htmlFor="vaccinated" className="form-check-label">
+                      Vacunado
+                    </label>
 
-                  <ErrorMessage
-                    name="role"
-                    component="div"
-                    className="invalid-feedback"
-                  />
-                </div>
-              </div>
-              <div className="col-md-4">
-                <img
-                  className="img-fluid"
-                  src="https://images.unsplash.com/photo-1422015347944-9dd46d16bd0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGVsZGVybHl8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <button type="submit" className="btn btn-primary fw-bold mt-4">
-                  Registrarse
-                </button>
-              </div>
-            </div>
+                    <ErrorMessage
+                      name="vaccinated"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div>
+                    <Field
+                      type="checkbox"
+                      name="role"
+                      className="form-check-input"
+                    />
+                    <label htmlFor="role" className="form-check-label">
+                      Cuidador
+                    </label>
+
+                    <ErrorMessage
+                      name="role"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-12">
+                      <button
+                        type="submit"
+                        className="btn btn-primary fw-bold mt-4"
+                      >
+                        Registrarse
+                      </button>
+                    </div>
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </div>
-        </Form>
-      )}
-    </Formik>
+          <div className="col-md-4">
+            <img
+              className="img-fluid"
+              src="https://images.unsplash.com/photo-1422015347944-9dd46d16bd0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGVsZGVybHl8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
