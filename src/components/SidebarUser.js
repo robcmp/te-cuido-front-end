@@ -1,13 +1,14 @@
 import React from "react";
 import "../styles/sidebarUser.css";
 import { slide as Menu } from "react-burger-menu";
+import { Link } from "react-router-dom";
 
 const SidebarUser = () => {
   return (
     <Menu>
-      <a className="menu-item" href="/">
+      <Link className="menu-item" to="/user/profile">
         <i className="bi bi-person-square"></i> Información Personal
-      </a>
+      </Link>
       <a className="menu-item" href="/salads">
         <i className="bi bi-cart-dash"></i>Publicación de Servicios
       </a>
