@@ -47,79 +47,90 @@ const RegisterForm = (props) => {
   });
 
   return (
-    <div className="mt-5 pt-4">
-      <Formik
-        initialValues={{
-          photo: "",
-          name: "",
-          last_name: "",
-          email: "",
-          birth_date: "",
-          password: "",
-          confirmPassword: "",
-          number_id: "",
-          id_photo: "",
-          country: "",
-          city: "",
-          phone: "",
-          occupation: "",
-          vaccinated: false,
-          role: "",
-        }}
-        validationSchema={formSchema}
-        onSubmit={(values, { resetForm }) => {
-          let values2 = _.omit(values, "confirmPassword", "id_photo", "photo");
-          const REST_API_URL = "http://localhost:5000/user";
-          fetch(REST_API_URL, {
-            method: "post",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values2),
-          })
-            .then((response) => {
-              if (response.ok) {
-                Swal.fire("Registro exitoso", "", "success");
-                resetForm({ values: "" });
-                // return response.json();
-              } else {
-                // HANDLE ERROR
-                if (response.status === 460) {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "El correo está siendo utilizado",
+    <div className="mt-5 pt-5">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <Formik
+              initialValues={{
+                photo: "",
+                name: "",
+                last_name: "",
+                email: "",
+                birth_date: "",
+                password: "",
+                confirmPassword: "",
+                number_id: "",
+                id_photo: "",
+                country: "",
+                city: "",
+                phone: "",
+                occupation: "",
+                vaccinated: false,
+                role: "",
+              }}
+              validationSchema={formSchema}
+              onSubmit={(values, { resetForm }) => {
+                let values2 = _.omit(
+                  values,
+                  "confirmPassword",
+                  "id_photo",
+                  "photo"
+                );
+                console.log(values2);
+                values2.role === false
+                  ? (values2.role = 3)
+                  : (values2.role = 2);
+
+                console.log(values2);
+                const REST_API_URL = "http://localhost:5000/user";
+                fetch(REST_API_URL, {
+                  method: "post",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(values2),
+                })
+                  .then((response) => {
+                    if (response.ok) {
+                      Swal.fire("Registro exitoso", "", "success");
+                      resetForm({ values: "" });
+                      // return response.json();
+                    } else {
+                      // HANDLE ERROR
+                      if (response.status === 460) {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: "El correo está siendo utilizado",
+                        });
+                      }
+                      if (response.status === 461) {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Oops...",
+                          text: "El DNI está siendo utilizado",
+                        });
+                      }
+                      // throw new Error("Something went wrong");
+                    }
+                  })
+                  .then((data) => {
+                    // HANDLE RESPONSE DATA
+                    // console.log(data);
+                  })
+                  .catch((error) => {
+                    // HANDLE ERROR
+                    console.log(error);
                   });
-                }
-                if (response.status === 461) {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "El DNI está siendo utilizado",
-                  });
-                }
-                // throw new Error("Something went wrong");
-              }
-            })
-            .then((data) => {
-              // HANDLE RESPONSE DATA
-              // console.log(data);
-            })
-            .catch((error) => {
-              // HANDLE ERROR
-              console.log(error);
-            });
-          // console.log(JSON.stringify(values));
-        }}
-        onChange={(values) => {
-          console.log(values);
-        }}
-      >
-        {(formsProps) => (
-          <Form>
-            <div className="container">
-              <div className="row">
-                <div className="col-md-6">
+                // console.log(JSON.stringify(values));
+              }}
+              onChange={(values) => {
+                console.log(values);
+              }}
+            >
+              {(formsProps) => (
+                <Form>
                   <div className="form-group">
                     <label htmlFor="photo">Foto de Perfil:</label>
                     <input
@@ -342,29 +353,30 @@ const RegisterForm = (props) => {
                       className="invalid-feedback"
                     />
                   </div>
-                </div>
-                <div className="col-md-4">
-                  <img
-                    className="img-fluid"
-                    src="https://images.unsplash.com/photo-1422015347944-9dd46d16bd0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGVsZGVybHl8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <button
-                    type="submit"
-                    className="btn btn-primary fw-bold mt-4"
-                  >
-                    Registrarse
-                  </button>
-                </div>
-              </div>
-            </div>
-          </Form>
-        )}
-      </Formik>
+
+                  <div className="row">
+                    <div className="col-md-12">
+                      <button
+                        type="submit"
+                        className="btn btn-primary fw-bold mt-4"
+                      >
+                        Registrarse
+                      </button>
+                    </div>
+                  </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
+          <div className="col-md-4">
+            <img
+              className="img-fluid"
+              src="https://images.unsplash.com/photo-1422015347944-9dd46d16bd0b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGVsZGVybHl8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
