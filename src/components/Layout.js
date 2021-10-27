@@ -8,7 +8,7 @@ import User from "../views/User";
 import Admin from "../views/Admin";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "./Profile";
-import Service from "../views/Service"
+import Service from "../views/Service";
 const Layout = () => {
   return (
     <Router>
@@ -33,7 +33,7 @@ const Layout = () => {
           <Route exact path="/admin">
             <Admin />
           </Route>
-          <Route exact path="/Services">
+          <Route exact path="/services">
             <Service />
           </Route>
           <Route render={() => <h1>Not found</h1>}></Route>
