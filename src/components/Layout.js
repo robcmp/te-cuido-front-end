@@ -8,7 +8,6 @@ import User from "../views/User";
 import Admin from "../views/Admin";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "./Profile";
-import Profile1 from "./Profile1";
 
 const Layout = () => {
   return (
@@ -22,8 +21,12 @@ const Layout = () => {
           <Route exact path="/login">
             <Login />
           </Route>
-          <PrivateRoute exact path="/user" component={()=> <User />}/>
-          <PrivateRoute exact path="/user/profile" component={()=> <Profile1 />}/>
+          <PrivateRoute exact path="/user" component={() => <User />} />
+          <PrivateRoute
+            exact
+            path="/user/profile"
+            component={() => <Profile />}
+          />
           <Route exact path="/register">
             <Register />
           </Route>
