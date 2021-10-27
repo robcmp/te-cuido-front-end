@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="/#">
-          Navbar
+          <img
+            src="https://i.ibb.co/J7Lxj1X/logo.jpg"
+            width="80"
+            alt=""
+            class="d-inline-block align-middle mr-2"
+          />
         </a>
         <button
           className="navbar-toggler"
@@ -34,7 +39,7 @@ const Navbar = () => {
           </ul>
           <div className="d-flex">
             <Link
-              to="/Login"
+              to="/login"
               className="btn btn-primary me-4 fw-bold"
               type="button"
             >
@@ -42,7 +47,7 @@ const Navbar = () => {
             </Link>
 
             <Link
-              to="/Register"
+              to="/register"
               className="btn btn-warning fw-bold"
               type="button"
             >

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form,  } from 'formik';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -15,6 +15,7 @@ const Services = () =>{
     <Formik
       initialValues={{
         toggle: " ",
+       
       }}
       onSubmit={async (values) => {
         await sleep(500);
@@ -27,10 +28,7 @@ const Services = () =>{
             This first checkbox will result in a boolean value being stored. Note that the `value` prop
             on the <Field/> is omitted
           */}
-          <label>
-            <Field type="checkbox" name="toggle" />
-            {`${values.toggle}`}
-          </label>
+         
 
           {/* 
             Multiple checkboxes with the same name attribute, but different
@@ -52,22 +50,25 @@ const Services = () =>{
           <div className="row">
               
               <div className= "col-md-4">
-          <label htmlFor="edad minima">Edad minima:</label>
+                <label htmlFor="edad minima">Edad minima:</label>
                   <Field
                     className="form-control"
-                    name="edad-minima"
-                    placeholder=""
-                    type="text"
+                    name="edad-min"
+                    placeholder="min"
+                    type="int"
                   />
+                  
                   </div>
                   <div className= "col-md-4">
             <label htmlFor="edad maxima">Edad maxima:</label>
                   <Field
                     className="form-control"
-                    name="edad-maxima"
-                    placeholder=""
-                    type="text"
+                    name="edad-max"
+                    placeholder="max"
+                    type="int"
                   />
+                   
+
                   </div>
               
           </div>
@@ -76,7 +77,7 @@ const Services = () =>{
                   <Field
                     className="form-control"
                     name="notas"
-                    placeholder=""
+                    placeholder="especificaciones"
                     type="text-area"
                   />
 

@@ -25,8 +25,8 @@ const Login = (props) => {
       .required("Correo es requerido"),
     password: Yup.string().required("Contraseña es requerida"),
   });
-
   return (
+<<<<<<< HEAD
     <Formik
       initialValues={{
         email: "",
@@ -55,79 +55,120 @@ const Login = (props) => {
               // HANDLE ERROR
                                 throw new Error("Something went wrong");
             }
+=======
+    <div className="pt-5 mt-5">
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+        }}
+        validationSchema={formSchema}
+        onSubmit={(values) => {
+          const REST_API_URL = "http://localhost:5000/login";
+          fetch(REST_API_URL, {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+>>>>>>> 79fcbfc9f526567fba8e067fe1f6d65d9b2b09fb
           })
-          .then((data) => {
-            saveUserInfo(data);
-            actions.setProfile(data);
-            // console.log(store);
-            // HANDLE RESPONSE DATA
-            // console.log(data);
-          })
-          .catch((error) => {
-            // HANDLE ERROR
-            console.log(error);
-          });
-      }}
-    >
-      <div className="container">
-        <div className="login-wrapper" style={loginStyle}>
-          <div className="d-flex">
-            <h2 className="mx-auto">Bienvenido</h2>
-          </div>
-          <Form className="form-container">
-            <div className="form-group mt-2">
-              <label htmlFor="email">Correo</label>
-              <Field
-                type="text"
-                name="email"
-                className={"form-control"}
-                placeholder="Correo"
-              />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="help-block text-danger"
-              />
+            .then((response) => {
+              if (response.ok) {
+                //history.push("/user");
+                return response.json();
+              } else {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Usuario o contraseña invalida",
+                });
+                // HANDLE ERROR
+                throw new Error("Something went wrong");
+              }
+            })
+            .then((data) => {
+              if (data.user !== "") {
+                saveUserInfo(data);
+                actions.setProfile(data);
+                localStorage.setItem("isAuth", JSON.stringify(true));
+                localStorage.setItem(
+                  "access_token",
+                  JSON.stringify(data.access_token)
+                );
+                history.push("/user");
+                // console.log(store);
+                // HANDLE RESPONSE DATA
+                // console.log(data);
+              }
+            })
+            .catch((error) => {
+              // HANDLE ERROR
+              console.log(error);
+            });
+        }}
+      >
+        <div className="container">
+          <div className="login-wrapper" style={loginStyle}>
+            <div className="d-flex">
+              <h2 className="mx-auto">Bienvenido</h2>
             </div>
-            <div className="form-group mt-3">
-              <label htmlFor="password">Contraseña</label>
-              <Field
-                type="password"
-                name="password"
-                className={"form-control"}
-                placeholder="Contraseña"
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="help-block text-danger"
-              />
-            </div>
-            <div className="d-grid gap-2">
-              <button
-                type="submit"
-                className="btn btn-primary btn-large fw-bold mt-4"
-              >
-                Iniciar Sesión
-              </button>
-            </div>
-            <div className="row mt-4">
-              <div className="col-md-8 fw-bold">¿Olvidaste tu contraseña?</div>
-              <div className="col-md-4 fw-bold">
-                <Link
-                  to="/Register"
-                  className="btn btn-warning fw-bold"
-                  type="button"
-                >
-                  Registrarse
-                </Link>
+            <Form className="form-container">
+              <div className="form-group mt-2">
+                <label htmlFor="email">Correo</label>
+                <Field
+                  type="text"
+                  name="email"
+                  className={"form-control"}
+                  placeholder="Correo"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="help-block text-danger"
+                />
               </div>
-            </div>
-          </Form>
+              <div className="form-group mt-3">
+                <label htmlFor="password">Contraseña</label>
+                <Field
+                  type="password"
+                  name="password"
+                  className={"form-control"}
+                  placeholder="Contraseña"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="help-block text-danger"
+                />
+              </div>
+              <div className="d-grid gap-2">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-large fw-bold mt-4"
+                >
+                  Iniciar Sesión
+                </button>
+              </div>
+              <div className="row mt-4">
+                <div className="col-md-8 fw-bold">
+                  ¿Olvidaste tu contraseña?
+                </div>
+                <div className="col-md-4 fw-bold">
+                  <Link
+                    to="/Register"
+                    className="btn btn-warning fw-bold"
+                    type="button"
+                  >
+                    Registrarse
+                  </Link>
+                </div>
+              </div>
+            </Form>
+          </div>
         </div>
-      </div>
-    </Formik>
+      </Formik>
+    </div>
   );
 };
-
 export default Login;

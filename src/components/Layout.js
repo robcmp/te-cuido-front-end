@@ -6,7 +6,9 @@ import Login from "../views/Login";
 import Register from "./RegisterForm";
 import User from "../views/User";
 import Admin from "../views/Admin";
-import Services from "../views/Service"
+import PrivateRoute from "./PrivateRoute";
+import Profile from "./Profile";
+
 const Layout = () => {
   return (
     <Router>
@@ -16,19 +18,19 @@ const Layout = () => {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route exact path="/Login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route exact path="/User">
-            <User />
-          </Route>
-          <Route exact path="/Register">
+          <PrivateRoute exact path="/user" component={() => <User />} />
+          <PrivateRoute
+            exact
+            path="/user/profile"
+            component={() => <Profile />}
+          />
+          <Route exact path="/register">
             <Register />
           </Route>
-          <Route exact path="/Services">
-            <Services />
-          </Route>
-          <Route exact path="/Admin">
+          <Route exact path="/admin">
             <Admin />
           </Route>
           
@@ -38,5 +40,4 @@ const Layout = () => {
     </Router>
   );
 };
-
 export default Layout;
