@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
-import DatePicker from "react-datepicker";
-import "../../node_modules/react-datepicker/dist/react-datepicker.css";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const Services = () => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [date, setDate] = useState([new Date(), new Date()]);
 
   return (
     <div className="container">
@@ -40,21 +39,21 @@ const Services = () => {
                     </div>
 
                     <div className="col-md-6">
-                      <label htmlFor="edad minima">Edad minima:</label>
+                      <label htmlFor="min-age">Edad minima:</label>
                       <Field
                         className="form-control"
-                        name="edad-min"
-                        placeholder="min"
-                        type="int"
+                        name="min-age"
+                        placeholder="Edad desde"
+                        type="numb"
                       />
                     </div>
                     <div className="col-md-6">
-                      <label htmlFor="edad maxima">Edad maxima:</label>
+                      <label htmlFor="max-age">Edad maxima:</label>
                       <Field
                         className="form-control"
-                        name="edad-max"
-                        placeholder="max"
-                        type="int"
+                        name="max-age"
+                        placeholder="hasta"
+                        type="number"
                       />
                     </div>
                     <div className="col-md-12">
@@ -69,20 +68,10 @@ const Services = () => {
                       />
                     </div>
                     <div className="row">
-                      <div className="col-md-6">
-                        <label>Fecha Inicio:</label>
-                        <DatePicker
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                        />
-                      </div>
-                      <div className="col-md-6">
+                      <div className="col-md-12">
                         <label>Fecha Final:</label>
 
-                        <DatePicker
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                        />
+                        <DateRangePicker onChange={setDate} value={date} />
                       </div>
                     </div>
                     <div className="col-md-6 mt-4">
