@@ -27,27 +27,13 @@ const Profile1 = () => {
             .required("Campo requerido")
             .email("Correo electrónico invalido")
             .max(30, `máximo 30 caracteres`),
-        password: Yup.string()
-            .required("Por favor ingrese su contraseña")
-            .matches(
-                /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-                "La contraseña debe contener por lo menos 8 caracteres, uno en mayúscula, un número y un caracter especial"
-            ),
-        confirmPassword: Yup.string()
-            .required("Por favor confirme su contraseña")
-            .oneOf([Yup.ref("password")], "Las contraseñas deben coincidir"),
         number_id: Yup.string()
             .required("Campo requerido")
             .matches(rutRegex, "RUT inválido"),
-        id_photo: Yup.string()
-            .oneOf([Yup.ref("id_photo")])
-            .required("Foto requerida"),
         country: Yup.string().required("Campo requerido"),
         city: Yup.string().required("Campo requerido"),
         phone: Yup.string().required("Campo requerido"),
         occupation: Yup.string().required("Campo requerido"),
-        vaccinated: Yup.bool().oneOf([true], "Estar vacunado es requerido"),
-        user_type: Yup.bool(),
     });
 
     return (
@@ -57,19 +43,41 @@ const Profile1 = () => {
                 name: welcome.user.name,
                 last_name: welcome.user.last_name,
                 email: welcome.user.email,
-                password: "",
-                confirmPassword: "",
                 number_id: welcome.user.number_id,
-                id_photo: "",
                 country: welcome.user.country,
                 city: welcome.user.city,
                 phone: welcome.user.phone,
-                occupation: welcome.user.occupation,
-                vaccinated: welcome.user.vaccinated,
-                role: welcome.user.role
+                occupation: welcome.user.occupation
             }}
             validationSchema={formSchema}
-        /* onSubmit={} */
+            onSubmit={(values) => {
+                let values2 = _.omit(values, "number_id", "photo");
+                const REST_API_URL = `http://localhost:5000/update_user/${welcome.user.id}`;
+                fetch(REST_API_URL, {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(values2),
+                })
+                  .then((response) => {
+                    if (response.ok) {
+                      Swal.fire("Datos Actualizados", "", "success");
+                      // return response.json();
+
+                      // throw new Error("Something went wrong");
+                    }
+                  })
+                  .then((data) => {
+                    // HANDLE RESPONSE DATA
+                    // console.log(data);
+                  })
+                  .catch((error) => {
+                    // HANDLE ERROR
+                    console.log(error);
+                  });
+                // console.log(JSON.stringify(values));
+              }}
         >
             {(formsProps) => (
                 <Form>
@@ -136,57 +144,16 @@ const Profile1 = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="password">Contraseña:</label>
-                                    <Field
-                                        className="form-control"
-                                        name="password"
-                                        placeholder=""
-                                        type="password"
-                                    />
-                                    <ErrorMessage
-                                        name="password"
-                                        component="div"
-                                        className="field-error text-danger"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="confirmPassword">Repetir contraseña:</label>
-                                    <Field
-                                        className="form-control"
-                                        name="confirmPassword"
-                                        placeholder=""
-                                        type="password"
-                                    />
-                                    <ErrorMessage
-                                        name="confirmPassword"
-                                        component="div"
-                                        className="field-error text-danger"
-                                    />
-                                </div>
-                                <div className="form-group">
                                     <label htmlFor="number_id">DNI:</label>
                                     <Field
                                         className="form-control"
                                         name="number_id"
                                         placeholder=""
                                         type="string"
+                                        disabled
                                     />
                                     <ErrorMessage
                                         name="number_id"
-                                        component="div"
-                                        className="field-error text-danger"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="id_photo">DNI foto:</label>
-                                    <Field
-                                        className="form-control"
-                                        name="id_photo"
-                                        type="file"
-                                        accept="image/*"
-                                    />
-                                    <ErrorMessage
-                                        name="id_photo"
                                         component="div"
                                         className="field-error text-danger"
                                     />
@@ -245,38 +212,6 @@ const Profile1 = () => {
                                         name="occupation"
                                         component="div"
                                         className="field-error text-danger"
-                                    />
-                                </div>
-                                <div>
-                                    <Field
-                                        type="checkbox"
-                                        name="vaccinated"
-                                        className="form-check-input"
-                                    />
-                                    <label htmlFor="vaccinated" className="form-check-label">
-                                        Vacunado
-                                    </label>
-
-                                    <ErrorMessage
-                                        name="vaccinated"
-                                        component="div"
-                                        className="invalid-feedback"
-                                    />
-                                </div>
-                                <div>
-                                    <Field
-                                        type="checkbox"
-                                        name="user_type"
-                                        className="form-check-input"
-                                    />
-                                    <label htmlFor="user_type" className="form-check-label">
-                                        Cuidador
-                                    </label>
-
-                                    <ErrorMessage
-                                        name="user_type"
-                                        component="div"
-                                        className="invalid-feedback"
                                     />
                                 </div>
                             </div>
