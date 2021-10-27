@@ -4,7 +4,6 @@ import { Form, Field, Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
-
 const Login = (props) => {
   const { store, actions } = useContext(Context);
   const history = useHistory();
@@ -26,36 +25,6 @@ const Login = (props) => {
     password: Yup.string().required("Contraseña es requerida"),
   });
   return (
-<<<<<<< HEAD
-    <Formik
-      initialValues={{
-        email: "",
-        password: "",
-      }}
-      validationSchema={formSchema}
-      onSubmit={(values) => {
-        const REST_API_URL = "http://localhost:5000/login";
-        fetch(REST_API_URL, {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        })
-          .then((response) => {
-            if (response.ok) {
-              history.push("/User");
-              return response.json();
-            } else {
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Usuario o contraseña invalida",
-              });
-              // HANDLE ERROR
-                                throw new Error("Something went wrong");
-            }
-=======
     <div className="pt-5 mt-5">
       <Formik
         initialValues={{
@@ -71,7 +40,6 @@ const Login = (props) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(values),
->>>>>>> 79fcbfc9f526567fba8e067fe1f6d65d9b2b09fb
           })
             .then((response) => {
               if (response.ok) {

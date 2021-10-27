@@ -13,13 +13,7 @@
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "react": "^17.0.2",
-<<<<<<< HEAD
-    "react-bootstrap-validation": "^0.1.11",
     "react-burger-menu": "^2.7.1",
-    "react-datepicker": "^4.3.0",
-=======
-    "react-burger-menu": "^2.7.1",
->>>>>>> 79fcbfc9f526567fba8e067fe1f6d65d9b2b09fb
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^5.3.0",
