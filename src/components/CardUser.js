@@ -136,7 +136,7 @@ const CardUser = (props) => {
         <div className="card-footer text-center">
           <div className="d-flex justify-content-evenly">
             <div className="d-flex">
-              {isBanned === true ? (
+              {props.data.is_active ? (
                 <button
                   className="btn btn-primary"
                   id={props.data.id}
