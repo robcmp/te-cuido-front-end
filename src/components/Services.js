@@ -12,7 +12,11 @@ const Services = () => {
       <h1>Services</h1>
       <Formik
         initialValues={{
-          toggle: " ",
+          checked: false,
+          age_start: "",
+          age_end: "",
+          notes: "",
+          date: date,
         }}
         onSubmit={async (values) => {
           await sleep(500);
@@ -29,51 +33,63 @@ const Services = () => {
                   <div className="row">
                     <div role="group" aria-labelledby="checkbox-group">
                       <label>
-                        <Field type="checkbox" name="checked" value="Hombre" />
-                        Hombre
+                        <Field
+                          type="checkbox"
+                          name="checkedFemale"
+                          value="Hombre"
+                        />
+                        Mujer
                       </label>
                       <label>
-                        <Field type="checkbox" name="checked" value="Mujer" />
-                        Mujer
+                        <Field
+                          type="checkbox"
+                          name="checkedMale"
+                          value="Mujer"
+                        />
+                        Hombre
                       </label>
                     </div>
 
                     <div className="col-md-6">
-                      <label htmlFor="min-age">Edad minima:</label>
+                      <label htmlFor="age_start">Edad minima:</label>
                       <Field
                         className="form-control"
-                        name="min-age"
+                        name="age_start"
                         placeholder="Edad desde"
-                        type="numb"
+                        type="number"
                       />
                     </div>
                     <div className="col-md-6">
-                      <label htmlFor="max-age">Edad maxima:</label>
+                      <label htmlFor="age_end">Edad maxima:</label>
                       <Field
                         className="form-control"
-                        name="max-age"
+                        name="age_end"
                         placeholder="hasta"
                         type="number"
                       />
                     </div>
                     <div className="col-md-12">
-                      <label htmlFor="notas">Notas:</label>
+                      <label htmlFor="notes">Notas:</label>
                       <Field
                         className="form-control"
-                        name="notas"
+                        name="notes"
                         placeholder="especificaciones"
                         component="textarea"
                         rows=""
                         cols="100"
                       />
                     </div>
-                    <div className="row">
-                      <div className="col-md-12">
-                        <label>Fecha Final:</label>
 
-                        <DateRangePicker onChange={setDate} value={date} />
-                      </div>
+                    <div className="form-group">
+                      <label>Fecha Final:</label>
+                      <DateRangePicker
+                        name="date"
+                        onChange={setDate}
+                        value={date}
+                        minDate={new Date()}
+                      />
                     </div>
+
                     <div className="col-md-6 mt-4">
                       <button className="btn btn-primary" type="submit">
                         Enviar
