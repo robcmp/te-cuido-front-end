@@ -9,6 +9,7 @@ import Admin from "../views/Admin";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "./Profile";
 import Service from "../views/Service"
+import Listpublication from "../views/Listpublication";
 const Layout = () => {
   return (
     <Router>
@@ -38,6 +39,9 @@ const Layout = () => {
           </Route>
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
+        <Route exact path="/Listpublication">
+            <Home />
+          </Route>
       </div>
     </Router>
   );

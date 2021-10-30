@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SidebarAdmin from "../components/SidebarAdmin";
 import UserList from "../components/UserList";
 
-const Listpublicationa = () => {
+const Listpublication = () => {
   return (
     <div className="container-fluid">
       <div className="row">
