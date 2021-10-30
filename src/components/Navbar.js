@@ -7,7 +7,7 @@ const Navbar = () => {
     return location.pathname;
   }
   return (
-     usePathname()==="/" |  usePathname()==="/register" ?
+     usePathname()==="/" |  usePathname()==="/register" | usePathname()==="/login" ?
     <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="/#">
