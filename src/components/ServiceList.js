@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import CardService from "./CardService";
 
 const ServiceList = () => {
-  const [users, setUsers] = useState([]);
+  const [services, setServices] = useState([]);
 
   useEffect(() => {
-    const REST_API_URL = "http://localhost:5000/user";
+    const REST_API_URL = "http://localhost:5000/list_services";
     fetch(REST_API_URL, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
-      .then((data) => setUsers(data));
+      .then((data) => setServices(data));
     // actions.getDetailChar(params.id);
   }, []);
 
@@ -19,11 +19,11 @@ const ServiceList = () => {
     <>
       <div className="row">
         <div className=" mt-4 pb-4 pt-2 mb-4">
-          {users.map((people, i) => (
+          {services.map((service, i) => (
             <div className="col-md-12 my-3">
               <CardService
                 key={i}
-                data={people}
+                data={service}
                 image="https://via.placeholder.com/400x200"
               />
             </div>

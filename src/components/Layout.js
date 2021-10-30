@@ -34,14 +34,15 @@ const Layout = () => {
           <Route exact path="/admin">
             <Admin />
           </Route>
+          <Route exact path="/Listpublication">
+            <Listpublication />
+          </Route>
           <Route exact path="/Services">
             <Service />
           </Route>
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
-        <Route exact path="/Listpublication">
-            <Home />
-          </Route>
+    
       </div>
     </Router>
   );

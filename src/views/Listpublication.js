@@ -17,7 +17,7 @@ const Listpublication = () => {
           <div className="col-md-10">
             <div id="page-wrap" className="d-flex justify-content-center">
               <div className="">
-                <ServiceList />
+                <ServiceList/>
               </div>
             </div>
           </div>

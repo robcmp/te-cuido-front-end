@@ -1,82 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
-import "../styles/cardUser.css";
+//import "../styles/cardService.css";
 import Swal from "sweetalert2";
 
 const CardService = (props) => {
-  const [isBanned, setBanned] = useState(false);
-
-  useEffect(() => {
-    console.log("Here");
-    console.log(props.is_active);
-    if (props.is_active === false) {
-      console.log("Dentro del If");
-      setBanned(false);
-    }
-  }, [props.is_active]);
 
 
-  const deleteConf = (e) => {
-    Swal.fire({
-      title: "Usted quiere borrar este usuario?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Si",
-      denyButtonText: `No borrar`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        handleRemove(e.target.id);
-      } else if (result.isDenied) {
-        Swal.fire("Usuario no ha sido borrado", "", "info");
-      }
-    });
-  };
-
-  const handleRemove = (id) => {
-    const REST_API_URL = `http://localhost:5000/delete_user/${id}`;
-    fetch(REST_API_URL, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          // return response.json();
-          Swal.fire("Usuario borrado", "", "success");
-          setBanned(true);
-          console.log(isBanned);
-        } else if (response.status === 404) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Usuario ya fue baneado",
-          });
-        }
-      })
-      .then((data) => {
-        // HANDLE RESPONSE DATA
-        // console.log(data);
-      })
-      .catch((error) => {
-        // HANDLE ERROR
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Usuario ya fue borrado",
-        });
-        console.log(error);
-      });
-  };
-
+ 
   return (
     <>
       <div className="card scrolling-wrapper borders">
         <img src={props.image} className="card-img-top" alt="" />
         <div className="card-body">
-          <h5 className="card-title text-center">{props.data.name}</h5>
+          <h5 className="card-title text-center">{props.data.notes}</h5>
         </div>
         <div className="card-footer text-center">
           <div className="d-flex justify-content-evenly">
@@ -85,7 +22,6 @@ const CardService = (props) => {
               <button
                 className="btn btn-primary"
                 id={props.data.id}
-                onClick={deleteConf}
               >
                 {" "}
                 VIEW{" "}
