@@ -7,17 +7,17 @@ const SidebarUser = () => {
   return (
     <Menu>
       <Link className="menu-item" to="/user/profile">
-        <i className="bi bi-person-square"></i> Información Personal
+        <i className="bi bi-person-square"></i>Información Personal
       </Link>
-      <a className="menu-item" to="">
-        <i className="bi bi-cart-dash"></i>Publicación de Servicios
-      </a>
-      <a className="menu-item" href="/salads">
-        <i className="bi bi-cart-dash"></i> Pendientes/Aceptados
-      </a>
-      <a className="menu-item" href="/salads">
-        <i className="bi bi-cart-dash"></i> lista de Servicios
-      </a>
+      <Link className="menu-item" to="/user/PublicacionServicios">
+        <i className="bi bi-cart-dash"></i>Publicacion de Servicios
+      </Link>
+      <Link className="menu-item" to="">
+        <i className="bi bi-cart-dash"></i>Pentiendes/Aceptados
+      </Link>
+      <Link className="menu-item" to="">
+        <i className="bi bi-cart-dash"></i>Lista de Servicios
+      </Link>
     </Menu>
   );
 };
