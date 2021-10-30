@@ -19,8 +19,7 @@ const Services = () => {
           date: date,
         }}
         onSubmit={async (values) => {
-          await sleep(500);
-          alert(JSON.stringify(values, null, 2));
+          console.log(values);
         }}
       >
         {({ values }) => (
@@ -87,6 +86,16 @@ const Services = () => {
                         onChange={setDate}
                         value={date}
                         minDate={new Date()}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="price">Precio servicio:</label>
+                      <Field
+                        className="form-control"
+                        name="price"
+                        placeholder="Precio servicio"
+                        type="number"
                       />
                     </div>
 
