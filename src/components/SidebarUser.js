@@ -9,7 +9,7 @@ const SidebarUser = () => {
       <Link className="menu-item" to="/user/profile">
         <i className="bi bi-person-square"></i> Información Personal
       </Link>
-      <a className="menu-item" href="/salads">
+      <a className="menu-item" to="">
         <i className="bi bi-cart-dash"></i>Publicación de Servicios
       </a>
       <a className="menu-item" href="/salads">
