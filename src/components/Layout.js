@@ -44,7 +44,7 @@ const Layout = () => {
             <Service />
           </Route>
 
-          <Route exact path="/service_publication">
+          <Route exact path="/user/service_publication">
             <ServicesPublication />
           </Route>
 

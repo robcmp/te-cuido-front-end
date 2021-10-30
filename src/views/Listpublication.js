@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SidebarAdmin from "../components/SidebarAdmin";
+import SidebarUser from "../components/SidebarUser";
 import ServiceList from "../components/ServiceList";
 
 const Listpublication = () => {
@@ -9,9 +9,9 @@ const Listpublication = () => {
       <div className="row">
         <div id="outer-container">
           <div className="col-md-2">
-            <SidebarAdmin
-              pageWrapId={"page-wrap"}
-              outerContainerId={"outer-container"}
+            <SidebarUser
+              //pageWrapId={"page-wrap"}
+              //outerContainerId={"outer-container"}
             />
           </div>
           <div className="col-md-10">
