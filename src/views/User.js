@@ -2,7 +2,6 @@ import React from "react";
 import SidebarUser from "../components/SidebarUser";
 import { useEffect, useState} from "react";
 
-
 const User = () => {
   const [user, setUser] = useState("");
   const welcome = JSON.parse(localStorage.getItem("loginUser"));
@@ -28,8 +27,7 @@ const User = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-4">
-          <SidebarUser />
-         
+          <SidebarUser/>
         </div>
         <div className="col-md-8"></div>
       </div>
