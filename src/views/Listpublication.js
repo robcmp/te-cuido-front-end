@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SidebarAdmin from "../components/SidebarAdmin";
 import UserList from "../components/UserList";
 
-const Accept = () => {
+const Listpublicationa = () => {
   return (
     <div className="container-fluid">
       <div className="row">
@@ -27,4 +27,4 @@ const Accept = () => {
   );
 };
 
-export default Accept;
+export default Listpublication;
