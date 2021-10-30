@@ -22,6 +22,8 @@ const CardService = (props) => {
               <button
                 className="btn btn-primary"
                 id={props.data.id}
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
               >
                 {" "}
                 VIEW{" "}
@@ -30,8 +32,7 @@ const CardService = (props) => {
             <div className="d-flex">
               <button
                 className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
+               
               >
                 {" "}
                 ACCEPT{" "}
