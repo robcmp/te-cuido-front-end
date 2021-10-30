@@ -30,7 +30,11 @@ const User = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-4">
+<<<<<<< HEAD
           <SidebarUser />
+=======
+          <SidebarUser/>
+>>>>>>> 2a6764f1820f63e8cca39d504cacc6e6b95bf947
         </div>
         <div className="col-md-8">
           <h1>Bienvenido {welcome.user.name + " " + welcome.user.last_name}</h1>

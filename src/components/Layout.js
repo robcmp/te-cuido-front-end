@@ -8,7 +8,12 @@ import User from "../views/User";
 import Admin from "../views/Admin";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "./Profile";
+<<<<<<< HEAD
 import Service from "../views/Service";
+=======
+import Service from "../views/Service"
+import Listpublication from "../views/Listpublication";
+>>>>>>> 2a6764f1820f63e8cca39d504cacc6e6b95bf947
 const Layout = () => {
   return (
     <Router>
@@ -33,11 +38,19 @@ const Layout = () => {
           <Route exact path="/admin">
             <Admin />
           </Route>
+<<<<<<< HEAD
           <Route exact path="/services">
+=======
+          <Route exact path="/Listpublication">
+            <Listpublication />
+          </Route>
+          <Route exact path="/Services">
+>>>>>>> 2a6764f1820f63e8cca39d504cacc6e6b95bf947
             <Service />
           </Route>
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
+    
       </div>
     </Router>
   );
