@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SidebarAdmin from "../components/SidebarAdmin";
 import UserList from "../components/UserList";
 
-const Admin = () => {
+const Accept = () => {
   return (
     <div className="container-fluid">
       <div className="row">
@@ -27,4 +27,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Accept;
