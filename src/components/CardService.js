@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../styles/cardUser.css";
 import Swal from "sweetalert2";
 
-const AuxServicelist = (props) => {
+const CardService = (props) => {
   const [isBanned, setBanned] = useState(false);
 
   useEffect(() => {
@@ -133,7 +133,7 @@ const AuxServicelist = (props) => {
         <div className="card-body">
           <h5 className="card-title text-center">{props.data.name}</h5>
         </div>
-     //   <div className="card-footer text-center">
+        <div className="card-footer text-center">
           <div className="d-flex justify-content-evenly">
             <div className="d-flex">
               {isBanned === true ? (
@@ -181,7 +181,7 @@ const AuxServicelist = (props) => {
           </div>
         </div>
       </div>
-//
+
       <div
         className="modal fade"
         id="staticBackdrop"
@@ -224,4 +224,4 @@ const AuxServicelist = (props) => {
   );
 };
 
-export default AuxServicelist;
+export default CardService;
