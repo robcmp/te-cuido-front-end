@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AuxServicelist from "./AuxServicelist";
+import CardService from "./CardService";
 
 const ServiceList = () => {
   const [users, setUsers] = useState([]);
@@ -21,7 +21,7 @@ const ServiceList = () => {
         <div className=" mt-4 pb-4 pt-2 mb-4">
           {users.map((people, i) => (
             <div className="col-md-12 my-3">
-              <AuxServicelist
+              <CardService
                 key={i}
                 data={people}
                 image="https://via.placeholder.com/400x200"
