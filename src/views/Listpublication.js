@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SidebarAdmin from "../components/SidebarAdmin";
-import UserList from "../components/UserList";
+import ServiceList from "../components/ServiceList";
 
 const Listpublication = () => {
   return (
@@ -17,7 +17,7 @@ const Listpublication = () => {
           <div className="col-md-10">
             <div id="page-wrap" className="d-flex justify-content-center">
               <div className="">
-                <UserList />
+                <ServiceList />
               </div>
             </div>
           </div>
