@@ -12,11 +12,13 @@ const Services = () => {
       <h1>Services</h1>
       <Formik
         initialValues={{
-          checked: false,
+          checkedFemale: false,
+          checkedMale: false,
           age_start: "",
           age_end: "",
           notes: "",
           date: date,
+          price: "",
         }}
         onSubmit={async (values) => {
           console.log(values);
@@ -24,27 +26,32 @@ const Services = () => {
       >
         {({ values }) => (
           <div className="mt-5 pt-5 w-50 mx-auto">
-            <div class="card border-info">
+            <div className="card border-info">
               {/* <img src="..." class="card-img-top" alt="..." /> */}
-              <h5 class="card-header">Publicacion de Servicio</h5>
-              <div class="card-body">
+              <h5 className="card-header">Publicacion de Servicio</h5>
+              <div className="card-body">
                 <Form>
                   <div className="row">
-                    <div role="group" aria-labelledby="checkbox-group">
-                      <label>
-                        <Field
-                          type="checkbox"
-                          name="checkedFemale"
-                          value="Hombre"
-                        />
+                    <div>
+                      <Field
+                        type="checkbox"
+                        name="checkedFemale"
+                        className="form-check-input"
+                      />
+                      <label
+                        htmlFor="checkedFemale"
+                        className="form-check-label"
+                      >
                         Mujer
                       </label>
-                      <label>
-                        <Field
-                          type="checkbox"
-                          name="checkedMale"
-                          value="Mujer"
-                        />
+                    </div>
+                    <div>
+                      <Field
+                        type="checkbox"
+                        name="checkedMale"
+                        className="form-check-input"
+                      />
+                      <label htmlFor="checkedMale" className="form-check-label">
                         Hombre
                       </label>
                     </div>
