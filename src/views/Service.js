@@ -5,7 +5,7 @@ const Service = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-md-2">
           <SidebarUser />
         </div>
         <div className="col-md-8">
