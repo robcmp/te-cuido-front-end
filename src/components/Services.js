@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { Formik, Field, Form } from "formik";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import _ from "lodash";
+import * as Yup from "yup";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const Services = () => {
   const [date, setDate] = useState([new Date(), new Date()]);
-
+  const formSchema = Yup.object().shape({
+    age_start: Yup.number().required("Campo requerido"),
+    age_end: Yup.number().required("Campo requerido"),
+    notes: Yup.string(),
+    date: Yup.date().required("Campo requerido"),
+    price: Yup.number().required("Campo requerido"),
+  });
   return (
     <div className="container">
       <Formik
@@ -19,7 +27,9 @@ const Services = () => {
           date: date,
           price: "",
         }}
+        validationSchema={formSchema}
         onSubmit={async (values) => {
+          // let values2 = _.omit(values, "confirmPassword", "id_photo", "photo");
           console.log(values);
         }}
       >
@@ -62,6 +72,13 @@ const Services = () => {
                         name="age_start"
                         placeholder="Edad desde"
                         type="number"
+                        min="60"
+                        max="120"
+                      />
+                      <ErrorMessage
+                        name="age_start"
+                        component="div"
+                        className="field-error text-danger"
                       />
                     </div>
                     <div className="col-md-6">
@@ -71,6 +88,11 @@ const Services = () => {
                         name="age_end"
                         placeholder="hasta"
                         type="number"
+                      />
+                      <ErrorMessage
+                        name="age_end"
+                        component="div"
+                        className="field-error text-danger"
                       />
                     </div>
                     <div className="col-md-12">
