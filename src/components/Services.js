@@ -9,7 +9,6 @@ const Services = () => {
 
   return (
     <div className="container">
-      <h1>Services</h1>
       <Formik
         initialValues={{
           checkedFemale: false,
@@ -25,7 +24,7 @@ const Services = () => {
         }}
       >
         {({ values }) => (
-          <div className="mt-5 pt-5 w-50 mx-auto">
+          <div className="mt-5 pt-5 w-100 mx-auto">
             <div className="card border-info">
               {/* <img src="..." class="card-img-top" alt="..." /> */}
               <h5 className="card-header">Publicacion de Servicio</h5>
