@@ -1,8 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const usePathname = () => {
+    const location = useLocation();
+    return location.pathname;
+  }
   return (
+     usePathname()==="/" |  usePathname()==="/register" | usePathname()==="/login" ?
     <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="/#">
@@ -57,6 +62,8 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+    :
+  <></>
   );
 };
 

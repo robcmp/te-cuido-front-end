@@ -10,6 +10,8 @@ import PrivateRoute from "./PrivateRoute";
 import Profile from "./Profile";
 import Service from "../views/Service";
 import Listpublication from "../views/Listpublication";
+import ServicesPublication from "../views/ServicesPublication";
+
 const Layout = () => {
   return (
     <Router>
@@ -34,12 +36,18 @@ const Layout = () => {
           <Route exact path="/admin">
             <Admin />
           </Route>
-          <Route exact path="/Listpublication">
+          <Route exact path="/list_publication">
             <Listpublication />
           </Route>
-          <Route exact path="/Services">
+
+          <Route exact path="/services">
             <Service />
           </Route>
+
+          <Route exact path="/user/service_publication">
+            <ServicesPublication />
+          </Route>
+
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
       </div>

@@ -32,8 +32,10 @@ const User = () => {
         <div className="col-md-4">
           <SidebarUser />
         </div>
-        <div className="col-md-8">
-          <h1>Bienvenido {welcome.user.name + " " + welcome.user.last_name}</h1>
+        <div className="col-md-8 mt-5 pt-5 ">
+          <h1 className="mx-5">
+            Bienvenido {welcome.user.name + " " + welcome.user.last_name}
+          </h1>
         </div>
       </div>
     </div>
