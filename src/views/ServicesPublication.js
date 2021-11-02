@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext  } from "react";
 import { Context } from "../store/appContext";
 import PublicacionServicios from "../components/PublicacionServicios";
+import Swal from "sweetalert2";
 
 const ServicesPublication = () => {
     const { store, actions } = useContext(Context);
@@ -19,6 +20,8 @@ const ServicesPublication = () => {
         .then((response) => response.json())
         .then((data) => setServices(data));
     }, []);
+
+    
 
     return (
       <>
