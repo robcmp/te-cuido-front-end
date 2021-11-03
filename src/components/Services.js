@@ -4,23 +4,20 @@ import _ from "lodash";
 import * as Yup from "yup";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
 const Services = () => {
   const [date, setDate] = useState([new Date(), new Date()]);
   const formSchema = Yup.object().shape({
     age_start: Yup.number().required("Campo requerido"),
     age_end: Yup.number().required("Campo requerido"),
     notes: Yup.string(),
-    date: Yup.date().required("Campo requerido"),
     price: Yup.number().required("Campo requerido"),
   });
   return (
     <div className="container">
       <Formik
         initialValues={{
-          checkedFemale: false,
-          checkedMale: false,
+          checkFemale: false,
+          checkMale: false,
           age_start: "",
           age_end: "",
           notes: "",
@@ -29,8 +26,17 @@ const Services = () => {
         }}
         validationSchema={formSchema}
         onSubmit={async (values) => {
-          // let values2 = _.omit(values, "confirmPassword", "id_photo", "photo");
-          console.log(values);
+          let values2 = values;
+          if (values.checkFemale && values.checkMale) {
+            values2.gender = 3;
+          } else if (values.checkFemale) {
+            values2.gender = 1;
+          } else if (values.checkMale) {
+            values2.gender = 2;
+          }
+          let values3 = _.omit(values2, "checkFemale", "checkMale");
+          console.log(values3);
+          // console.log(values);
         }}
       >
         {({ values }) => (
@@ -44,23 +50,20 @@ const Services = () => {
                     <div>
                       <Field
                         type="checkbox"
-                        name="checkedFemale"
+                        name="checkFemale"
                         className="form-check-input"
                       />
-                      <label
-                        htmlFor="checkedFemale"
-                        className="form-check-label"
-                      >
+                      <label htmlFor="checkFemale" className="form-check-label">
                         Mujer
                       </label>
                     </div>
                     <div>
                       <Field
                         type="checkbox"
-                        name="checkedMale"
+                        name="checkMale"
                         className="form-check-input"
                       />
-                      <label htmlFor="checkedMale" className="form-check-label">
+                      <label htmlFor="checkMale" className="form-check-label">
                         Hombre
                       </label>
                     </div>
