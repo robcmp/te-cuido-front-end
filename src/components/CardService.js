@@ -5,9 +5,6 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const CardService = (props) => {
-
-
- 
   return (
     <>
       <div className="card scrolling-wrapper borders">
@@ -17,7 +14,6 @@ const CardService = (props) => {
         </div>
         <div className="card-footer text-center">
           <div className="d-flex justify-content-evenly">
-          
             <div className="d-flex">
               <button
                 className="btn btn-primary"
@@ -30,13 +26,7 @@ const CardService = (props) => {
               </button>
             </div>
             <div className="d-flex">
-              <button
-                className="btn btn-primary"
-               
-              >
-                {" "}
-                ACCEPT{" "}
-              </button>
+              <button className="btn btn-primary"> ACCEPT </button>
             </div>
           </div>
         </div>
@@ -47,7 +37,7 @@ const CardService = (props) => {
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
