@@ -3,6 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import _ from "lodash";
 import * as Yup from "yup";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import Swal from "sweetalert2";
 
 const Services = () => {
   const [date, setDate] = useState([new Date(), new Date()]);
@@ -25,7 +26,7 @@ const Services = () => {
           price: "",
         }}
         validationSchema={formSchema}
-        onSubmit={async (values) => {
+        onSubmit={(values, { resetForm }) => {
           let values2 = values;
           if (values.checkFemale && values.checkMale) {
             values2.gender = 3;
@@ -36,6 +37,47 @@ const Services = () => {
           }
           let values3 = _.omit(values2, "checkFemale", "checkMale");
           console.log(values3);
+          let id = 2;
+          // const REST_API_URL = `http://localhost:5000/services/${id}`;
+          // fetch(REST_API_URL, {
+          //   method: "post",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
+          //   body: JSON.stringify(values3),
+          // })
+          //   .then((response) => {
+          //     if (response.ok) {
+          //       Swal.fire("Registro exitoso", "", "success");
+          //       resetForm({ values: "" });
+          //       // return response.json();
+          //     } else {
+          //       // HANDLE ERROR
+          //       if (response.status === 460) {
+          //         Swal.fire({
+          //           icon: "error",
+          //           title: "Oops...",
+          //           text: "El correo está siendo utilizado",
+          //         });
+          //       }
+          //       if (response.status === 461) {
+          //         Swal.fire({
+          //           icon: "error",
+          //           title: "Oops...",
+          //           text: "El DNI está siendo utilizado",
+          //         });
+          //       }
+          //       // throw new Error("Something went wrong");
+          //     }
+          //   })
+          //   .then((data) => {
+          //     // HANDLE RESPONSE DATA
+          //     // console.log(data);
+          //   })
+          //   .catch((error) => {
+          //     // HANDLE ERROR
+          //     console.log(error);
+          //   });
           // console.log(values);
         }}
       >
