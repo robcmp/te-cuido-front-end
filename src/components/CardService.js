@@ -26,7 +26,7 @@ const CardService = (props) => {
               </button>
             </div>
             <div className="d-flex">
-              <button className="btn btn-primary"> ACCEPT </button>
+              <button className="btn btn-primary"> RESERVAR </button>
             </div>
           </div>
         </div>
