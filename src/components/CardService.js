@@ -2,8 +2,17 @@ import React, { useEffect, useState } from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
 //import "../styles/cardService.css";
-import Swal from "sweetalert2";
+//import Swal from "sweetalert2";
+import Swal from "sweetalert";
 
+const Reservar = () => {
+  Swal ({
+    title: "Reserva hecha!",
+    //text: "esta es la respuesta de la prueba",
+    icon: "success",
+    //button: "Aceptar Reserva"
+  });
+}
 const CardService = (props) => {
   return (
     <>
@@ -25,8 +34,9 @@ const CardService = (props) => {
                 VIEW{" "}
               </button>
             </div>
-            <div className="d-flex">
-              <button className="btn btn-primary"> RESERVAR </button>
+            <div className="d-flex" >
+            
+              <button className="btn btn-primary" onClick={()=> Reservar()}> RESERVAR </button>
             </div>
           </div>
         </div>
