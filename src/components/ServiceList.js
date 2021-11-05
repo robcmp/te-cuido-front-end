@@ -27,8 +27,6 @@ const ServiceList = () => {
                 data={service}
                 image="https://via.placeholder.com/400x200"
               />
-
-              <h1>Test</h1>
             </div>
           ))}
         </div>
