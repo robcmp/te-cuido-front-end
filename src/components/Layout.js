@@ -8,7 +8,7 @@ import User from "../views/User";
 import Admin from "../views/Admin";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "./Profile";
-import Service from "../views/Service"
+import Service from "../views/Service";
 import Listpublication from "../views/Listpublication";
 import ServicesPublication from "../views/ServicesPublication";
 
@@ -50,7 +50,6 @@ const Layout = () => {
 
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
-    
       </div>
     </Router>
   );

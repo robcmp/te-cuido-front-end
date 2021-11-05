@@ -10,17 +10,14 @@ export const getState = ({ setStore, getStore, getActions }) => {
 
       getPeopleinfo: (id) => {
         const actions = getActions();
-        let url = 'http://localhost:5000/user' + id;
+        let url = "http://localhost:5000/user" + id;
 
         fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                actions.setProfile(data);
-            })
-    },
-
-
-
+          .then((response) => response.json())
+          .then((data) => {
+            actions.setProfile(data);
+          });
+      },
     },
   };
 };

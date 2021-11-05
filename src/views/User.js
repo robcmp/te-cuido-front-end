@@ -11,17 +11,20 @@ const User = () => {
       method: "POST",
       mode: "cors",
       headers: {
-        'Content-Type': "application/json",
-        'Access-Control-Allow-Origin': '*',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem("access_token"))}`
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        Authorization: `Bearer ${JSON.parse(
+          localStorage.getItem("access_token")
+        )}`,
       },
-      body: JSON.stringify("")
-    }).then(response => response.json())
-      .then(data => {
-        setUser(data.current_user)
+      body: JSON.stringify(""),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data.current_user);
       })
-      .catch(error => console.log(error))
-  }, [])
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <div className="container-fluid">
@@ -30,10 +33,11 @@ const User = () => {
           <SidebarUser />
         </div>
         <div className="col-md-8 mt-5 pt-5 ">
-          <h1 className="mx-5">Bienvenido {welcome.user.name + " " + welcome.user.last_name}</h1>
+          <h1 className="mx-5">
+            Bienvenido {welcome.user.name + " " + welcome.user.last_name}
+          </h1>
         </div>
       </div>
-
     </div>
   );
 };
