@@ -169,14 +169,7 @@ const CardUser = (props) => {
               </button>
             </div>
             <div className="d-flex">
-              <button
-                className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-              >
-                {" "}
-                EDIT{" "}
-              </button>
+              
             </div>
           </div>
         </div>

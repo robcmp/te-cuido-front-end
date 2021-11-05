@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CardService from "./CardService";
+import Swal from "sweetalert2";
 
 const ServiceList = () => {
   const [services, setServices] = useState([]);
@@ -15,6 +16,7 @@ const ServiceList = () => {
     // actions.getDetailChar(params.id);
   }, []);
 
+  
   return (
     <>
       <div className="row">
