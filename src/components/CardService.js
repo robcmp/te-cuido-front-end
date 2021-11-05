@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
 //import "../styles/cardService.css";
-//import Swal from "sweetalert2";
-import Swal from "sweetalert";
+import Swal from "sweetalert2";
+//import Swal from "sweetalert";
 
 const Reservar = () => {
-  Swal ({
+  Swal.fire ({
     title: "Reserva hecha!",
     //text: "esta es la respuesta de la prueba",
     icon: "success",
