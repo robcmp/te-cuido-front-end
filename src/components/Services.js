@@ -35,50 +35,43 @@ const Services = () => {
           } else if (values.checkMale) {
             values2.gender = 2;
           }
-          let values3 = _.omit(values2, "checkFemale", "checkMale");
+          let values3 = _.omit(values2, "checkFemale", "checkMale", "date");
           console.log(values3);
           let id = 2;
-          // const REST_API_URL = `http://localhost:5000/services/${id}`;
-          // fetch(REST_API_URL, {
-          //   method: "post",
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //   },
-          //   body: JSON.stringify(values3),
-          // })
-          //   .then((response) => {
-          //     if (response.ok) {
-          //       Swal.fire("Registro exitoso", "", "success");
-          //       resetForm({ values: "" });
-          //       // return response.json();
-          //     } else {
-          //       // HANDLE ERROR
-          //       if (response.status === 460) {
-          //         Swal.fire({
-          //           icon: "error",
-          //           title: "Oops...",
-          //           text: "El correo está siendo utilizado",
-          //         });
-          //       }
-          //       if (response.status === 461) {
-          //         Swal.fire({
-          //           icon: "error",
-          //           title: "Oops...",
-          //           text: "El DNI está siendo utilizado",
-          //         });
-          //       }
-          //       // throw new Error("Something went wrong");
-          //     }
-          //   })
-          //   .then((data) => {
-          //     // HANDLE RESPONSE DATA
-          //     // console.log(data);
-          //   })
-          //   .catch((error) => {
-          //     // HANDLE ERROR
-          //     console.log(error);
-          //   });
-          // console.log(values);
+          const REST_API_URL = `http://localhost:5000/services/${id}`;
+          fetch(REST_API_URL, {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values3),
+          })
+            .then((response) => {
+              if (response.ok) {
+                Swal.fire("Servicio creado exitosamente", "", "success");
+                resetForm({ values: "" });
+                // return response.json();
+              } else {
+                // HANDLE ERROR
+
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Problemas al crear servicio",
+                });
+
+                // throw new Error("Something went wrong");
+              }
+            })
+            .then((data) => {
+              // HANDLE RESPONSE DATA
+              // console.log(data);
+            })
+            .catch((error) => {
+              // HANDLE ERROR
+              console.log(error);
+            });
+          console.log(values);
         }}
       >
         {({ values }) => (
