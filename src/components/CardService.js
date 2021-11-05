@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
-//import "../styles/cardService.css";
+// import "../styles/cardService.css";
 import Swal from "sweetalert2";
-//import Swal from "sweetalert";
 
-const Reservar = () => {
-  Swal.fire ({
-    title: "Reserva hecha!",
-    //text: "esta es la respuesta de la prueba",
-    icon: "success",
-    //button: "Aceptar Reserva"
-  });
-}
 const CardService = (props) => {
+  const Reservar = () => {
+    Swal.fire({
+      title: "Reserva hecha!",
+      //text: "esta es la respuesta de la prueba",
+      icon: "success",
+      //button: "Aceptar Reserva"
+    });
+  };
+
+  const ServiceDetail = () => {
+    console.log("me dieron click");
+  };
+
   return (
     <>
       <div className="card scrolling-wrapper borders">
@@ -29,14 +33,17 @@ const CardService = (props) => {
                 id={props.data.id}
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
+                onClick={ServiceDetail}
               >
                 {" "}
                 VIEW{" "}
               </button>
             </div>
-            <div className="d-flex" >
-            
-              <button className="btn btn-primary" onClick={()=> Reservar()}> RESERVAR </button>
+            <div className="d-flex">
+              <button className="btn btn-primary" onClick={Reservar}>
+                {" "}
+                RESERVAR{" "}
+              </button>
             </div>
           </div>
         </div>
@@ -64,7 +71,12 @@ const CardService = (props) => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">...</div>
+            <div className="modal-body">
+              <p>{props.data.notes}</p>
+              <p>{props.data.price}</p>
+              <p>{props.data.date_init}</p>
+              <p>{props.data.date_end}</p>
+            </div>
             <div className="modal-footer">
               <button
                 type="button"
