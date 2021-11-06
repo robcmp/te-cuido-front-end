@@ -2,7 +2,6 @@ import React from "react";
 import "../index.css";
 import Swal from "sweetalert2";
 
-
 const deleteServices = (e) => {
   Swal.fire({
     title: "Usted quiere borrar el servicio?",
@@ -40,8 +39,7 @@ const deleteServicesById = (id) => {
         });
       }
     })
-    .then((data) => {
-    })
+    .then((data) => {})
     .catch((error) => {
       Swal.fire({
         icon: "error",
@@ -51,8 +49,6 @@ const deleteServicesById = (id) => {
       console.log(error);
     });
 };
-
-
 
 const PublicacionServicios = (props) => {
   return (
@@ -64,7 +60,6 @@ const PublicacionServicios = (props) => {
         </div>
         <div className="card-footer text-center">
           <div className="d-flex justify-content-evenly">
-          
             <div className="d-flex">
               <button
                 className="btn btn-primary"
@@ -73,15 +68,15 @@ const PublicacionServicios = (props) => {
                 data-bs-target="#staticBackdrop"
               >
                 {" "}
-                VIEW{" "}
+                VER{" "}
               </button>
             </div>
             <div className="d-flex">
               <button
                 className="btn btn-primary"
                 id={props.data.id}
-                onClick={deleteServices} 
-              > 
+                onClick={deleteServices}
+              >
                 {" "}
                 DELETE{" "}
               </button>
@@ -131,6 +126,5 @@ const PublicacionServicios = (props) => {
     </>
   );
 };
-
 
 export default PublicacionServicios;
