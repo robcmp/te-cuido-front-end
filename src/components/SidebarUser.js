@@ -13,7 +13,7 @@ const SidebarUser = () => {
         <i className="bi bi-cart-dash"></i>Publicación de Servicios
       </Link>
       <Link className="menu-item" to="">
-        <i className="bi bi-cart-dash"></i>Pendiendes/Aceptados
+        <i className="bi bi-cart-dash"></i>Pendientes/Aceptados
       </Link>
       <Link className="menu-item" to="">
         <i className="bi bi-cart-dash"></i>Lista de Servicios
