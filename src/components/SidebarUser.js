@@ -10,10 +10,10 @@ const SidebarUser = () => {
         <i className="bi bi-person-square"></i>Información Personal
       </Link>
       <Link className="menu-item" to="/user/service_publication">
-        <i className="bi bi-cart-dash"></i>Publicacion de Servicios
+        <i className="bi bi-cart-dash"></i>Publicación de Servicios
       </Link>
       <Link className="menu-item" to="">
-        <i className="bi bi-cart-dash"></i>Pentiendes/Aceptados
+        <i className="bi bi-cart-dash"></i>Pendientes/Aceptados
       </Link>
       <Link className="menu-item" to="">
         <i className="bi bi-cart-dash"></i>Lista de Servicios

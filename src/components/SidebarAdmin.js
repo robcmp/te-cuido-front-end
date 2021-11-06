@@ -11,16 +11,16 @@ const SidebarAdmin = (props) => {
   return (
     <Menu>
       <a className="menu-item" href="/">
-        <i class="bi bi-person-square"></i> User List
+        <i class="bi bi-person-square"></i> Lista de usuarios
       </a>
       <a className="menu-item" href="/salads">
-        <i class="bi bi-pin"></i> Publications List
+        <i class="bi bi-pin"></i> Lista de publicaciones
       </a>
       <a className="menu-item" href="/salads">
-        <i class="bi bi-credit-card"></i> Payments List
+        <i class="bi bi-credit-card"></i> Lista de pagos 
       </a>
       <a className="menu-item" href="/salads">
-        <i class="bi bi-archive"></i> Report List
+        <i class="bi bi-archive"></i> Lista de reportes
       </a>
     </Menu>
   );

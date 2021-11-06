@@ -78,7 +78,7 @@ const Services = () => {
           <div className="mt-5 pt-5 w-100 mx-auto">
             <div className="card border-info">
               {/* <img src="..." class="card-img-top" alt="..." /> */}
-              <h5 className="card-header">Publicacion de Servicio</h5>
+              <h5 className="card-header">Publicación de Servicio</h5>
               <div className="card-body">
                 <Form>
                   <div className="row">
@@ -104,7 +104,7 @@ const Services = () => {
                     </div>
 
                     <div className="col-md-6">
-                      <label htmlFor="age_start">Edad minima:</label>
+                      <label htmlFor="age_start">Edad mínima:</label>
                       <Field
                         className="form-control"
                         name="age_start"
@@ -120,7 +120,7 @@ const Services = () => {
                       />
                     </div>
                     <div className="col-md-6">
-                      <label htmlFor="age_end">Edad maxima:</label>
+                      <label htmlFor="age_end">Edad máxima:</label>
                       <Field
                         className="form-control"
                         name="age_end"
