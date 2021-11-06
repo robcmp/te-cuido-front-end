@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import "../index.css";
 import { Link } from "react-router-dom";
 // import "../styles/cardService.css";
 import Swal from "sweetalert2";
 
 const CardService = (props) => {
+  const { store, actions } = useContext(Context);
   const Reservar = () => {
     Swal.fire({
       title: "Reserva hecha!",
@@ -15,7 +17,7 @@ const CardService = (props) => {
   };
 
   const ServiceDetail = () => {
-    console.log("me dieron click");
+    actions.setDetail(props.data);
   };
 
   return (
@@ -36,7 +38,7 @@ const CardService = (props) => {
                 onClick={ServiceDetail}
               >
                 {" "}
-                VIEW{" "}
+                VER{" "}
               </button>
             </div>
             <div className="d-flex">
@@ -72,13 +74,10 @@ const CardService = (props) => {
               ></button>
             </div>
             <div className="modal-body">
-              <p>{props.data.price}</p>
-              <p>{props.data.date_init}</p>
-              <p>{props.data.date_end}</p>
-              <p>{props.data.user_id}</p>
-              <p>{props.data.notes}</p>
-              <p>{props.key}</p>
-
+              <p>{store.detailService.notes}</p>
+              <p>{store.detailService.date_init}</p>
+              <p>{store.detailService.price}</p>
+              <p>{store.detailService.date_end}</p>
             </div>
             <div className="modal-footer">
               <button

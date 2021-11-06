@@ -16,7 +16,6 @@ const ServiceList = () => {
     // actions.getDetailChar(params.id);
   }, []);
 
-  
   return (
     <>
       <div className="row">

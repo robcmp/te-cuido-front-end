@@ -2,6 +2,7 @@ export const getState = ({ setStore, getStore, getActions }) => {
   return {
     store: {
       profileUser: {},
+      detailService: {},
     },
     actions: {
       setProfile: (data) => {
@@ -17,6 +18,9 @@ export const getState = ({ setStore, getStore, getActions }) => {
           .then((data) => {
             actions.setProfile(data);
           });
+      },
+      setDetail: (obj) => {
+        setStore({ detailService: obj });
       },
     },
   };
