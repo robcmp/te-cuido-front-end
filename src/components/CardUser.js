@@ -125,6 +125,7 @@ const CardUser = (props) => {
         console.log(error);
       });
   };
+
   return (
     <>
       <div className="card scrolling-wrapper borders">
