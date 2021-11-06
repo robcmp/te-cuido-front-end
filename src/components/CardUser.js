@@ -141,17 +141,17 @@ const CardUser = (props) => {
                   className="btn btn-primary"
                   id={props.data.id}
                   onClick={banConf}
-                  name="unban"
+                  name="desbloquear"
                 >
                   {" "}
-                  BLOQUEAR{" "}
+                  DESBLOQUEAR{" "}
                 </button>
               ) : (
                 <button
                   className="btn btn-primary"
                   id={props.data.id}
                   onClick={banConf}
-                  name="ban"
+                  name="bloquear"
                 >
                   {" "}
                   BLOQUEAR{" "}
