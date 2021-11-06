@@ -7,7 +7,7 @@ import Register from "./RegisterForm";
 import User from "../views/User";
 import Admin from "../views/Admin";
 import PrivateRoute from "./PrivateRoute";
-import Profile from "./Profile";
+import Profile from "./Profile"; 
 import Service from "../views/Service";
 import Listpublication from "../views/Listpublication";
 import ServicesPublication from "../views/ServicesPublication";
