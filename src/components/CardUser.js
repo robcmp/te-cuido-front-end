@@ -144,7 +144,7 @@ const CardUser = (props) => {
                   name="unban"
                 >
                   {" "}
-                  UNBAN{" "}
+                  BLOQUEAR{" "}
                 </button>
               ) : (
                 <button
@@ -154,7 +154,7 @@ const CardUser = (props) => {
                   name="ban"
                 >
                   {" "}
-                  BAN{" "}
+                  BLOQUEAR{" "}
                 </button>
               )}
             </div>
@@ -165,7 +165,7 @@ const CardUser = (props) => {
                 onClick={deleteConf}
               >
                 {" "}
-                DELETE{" "}
+                BORRAR{" "}
               </button>
             </div>
             <div className="d-flex">
