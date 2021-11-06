@@ -72,10 +72,13 @@ const CardService = (props) => {
               ></button>
             </div>
             <div className="modal-body">
-              <p>{props.data.notes}</p>
               <p>{props.data.price}</p>
               <p>{props.data.date_init}</p>
               <p>{props.data.date_end}</p>
+              <p>{props.data.user_id}</p>
+              <p>{props.data.notes}</p>
+              <p>{props.key}</p>
+
             </div>
             <div className="modal-footer">
               <button
