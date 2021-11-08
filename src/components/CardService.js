@@ -6,19 +6,53 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const CardService = (props) => {
-  const { store, actions } = useContext(Context);
+  const {store, actions} = useContext(Context);
   const Reservar = () => {
-    Swal.fire({
-      title: "Reserva hecha!",
-      //text: "esta es la respuesta de la prueba",
-      icon: "success",
-      //button: "Aceptar Reserva"
-    });
+    actions.setDetail(props.data);
+    console.log(store.detailService);
+    //const REST_API_URL = `http://localhost:5000/reserve/${id}`;
+    // fetch(REST_API_URL, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(body),
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       // return response.json();
+    //       Swal.fire("Reserva realizada", "", "success");
+    //     //  setReserve(true);
+    //     } else if (response.status === 404) {
+    //       Swal.fire({
+    //         icon: "error",
+    //         title: "Oops...",
+    //         text: "la reserva ya fue realizada",
+    //       });
+    //     }
+    //   })
+    //   .then((data) => {
+    //     // HANDLE RESPONSE DATA
+    //     // console.log(data);
+    //   })
+    //   .catch((error) => {
+    //     // HANDLE ERROR
+    //     Swal.fire({
+    //       icon: "error",
+    //       title: "Oops...",
+    //       text: "Usuario ya fue reservado",
+    //     });
+    //     console.log(error);
+    //   });
   };
 
   const ServiceDetail = () => {
     actions.setDetail(props.data);
+    console.log(props.data);
   };
+///////////////////////////////////////////////////////////////
+//const CardService = (props) => {
+//const [isReserve, setReserve] = useState(false);
 
   return (
     <>
