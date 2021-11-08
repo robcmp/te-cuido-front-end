@@ -40,11 +40,11 @@ const Layout = () => {
             <Listpublication />
           </Route>
 
-          <Route exact path="/services">
+          <Route exact path="/user/service_publication">
             <Service />
           </Route>
 
-          <Route exact path="/user/service_publication">
+          <Route exact path="/user/services">
             <ServicesPublication />
           </Route>
 
