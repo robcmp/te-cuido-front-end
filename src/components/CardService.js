@@ -10,6 +10,8 @@ const CardService = (props) => {
   const Reservar = () => {
     actions.setDetail(props.data);
     console.log(store.detailService);
+
+    
     //const REST_API_URL = `http://localhost:5000/reserve/${id}`;
     // fetch(REST_API_URL, {
     //   method: "POST",
