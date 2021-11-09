@@ -24,10 +24,12 @@ const Layout = () => {
           <Route exact path="/login">
             <Login />
           </Route>
-          <PrivateRoute exact path="/user" component={() => <User />} />
           <PrivateRoute
-            exact
-            path="/user/profile"
+            exact path="/user"
+            component={() => <User />}
+          />
+          <PrivateRoute
+            exact path="/user/profile"
             component={() => <Profile />}
           />
           <Route exact path="/register">
@@ -36,18 +38,18 @@ const Layout = () => {
           <Route exact path="/admin">
             <Admin />
           </Route>
-          <Route exact path="/list_publication">
-            <Listpublication />
-          </Route>
-
-          <Route exact path="/services">
-            <Service />
-          </Route>
-
-          <Route exact path="/user/service_publication">
-            <ServicesPublication />
-          </Route>
-
+          <PrivateRoute
+            exact path="/user/list_publication"
+            component={() => <Listpublication />}
+          />
+          <PrivateRoute
+            exact path="/user/service_publication"
+            component={() => <Service />}
+          />
+          <PrivateRoute 
+          exact path="/user/services"
+          component={() => <ServicesPublication />}
+          />
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
       </div>
