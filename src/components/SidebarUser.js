@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React,{useContext,useEffect} from "react";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
 import "../styles/sidebarUser.css";
@@ -7,24 +7,26 @@ import { Link } from "react-router-dom";
 
 const SidebarUser = (props) => {
 
-  const {store, action } = useContext(Context);
+  const {store, actions} = useContext(Context);
+  const history = useHistory();
+  
+  const getStorage = JSON.parse(localStorage.getItem("loginUser"));
+  console.log(getStorage);
 
-  const getStorage = localStorage.getItem("loginUser")
-
-
+  
 
   return (
     <Menu>
       <Link className="menu-item" to="/user/profile">
         <i className="bi bi-person-square"></i>Información Personal
       </Link>
-{ getStorage == undefined ? store.profileUser.user.role===2 ? 
+{ getStorage.user.role != undefined ? getStorage.user.role===2 ? 
       <Link className="menu-item" to="/user/service_publication">
         <i className="bi bi-cart-dash"></i>Publicación de Servicios
       </Link> : <></>
       
-      : }
-{ store.profileUser.user.role===2 ?
+      : history.push("/login")}
+{ getStorage.user.role===2 ?
       <Link className="menu-item" to="">
         <i className="bi bi-cart-dash"></i>Pendientes/Aceptados
       </Link> :  
@@ -33,13 +35,13 @@ const SidebarUser = (props) => {
       </Link>
 }
 
-{ store.profileUser.user.role===2 ?
-      <Link className="menu-item" to="">
+{ getStorage.user.role===2 ?
+      <Link className="menu-item" to="/user/services">
       <i className="bi bi-cart-dash"></i>Servicios Creados
     </Link>
       
        :
-       <Link className="menu-item" to="">
+       <Link className="menu-item" to="/user/list_publication">
        <i className="bi bi-cart-dash"></i>Lista de Servicios
      </Link>
 
