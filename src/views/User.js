@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const User = () => {
   const [user, setUser] = useState("");
   const welcome = JSON.parse(localStorage.getItem("loginUser"));
-  console.log(welcome);
+  //console.log(welcome);
   useEffect(() => {
     fetch("http://localhost:5000/me", {
       method: "POST",
