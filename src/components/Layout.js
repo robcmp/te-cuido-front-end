@@ -11,6 +11,7 @@ import Profile from "./Profile";
 import Service from "../views/Service";
 import ListPublications from "../views/ListPublications";
 import ServiceHistory from "../views/ServiceHistory";
+import ServiceConfirmation from "../views/ServiceConfirmation";
 
 const Layout = () => {
   return (
@@ -46,6 +47,10 @@ const Layout = () => {
 
           <Route exact path="/user/service_history">
             <ServiceHistory />
+          </Route>
+
+          <Route exact path="/user/service_confirmation">
+            <ServiceConfirmation />
           </Route>
 
           <Route render={() => <h1>Not found</h1>}></Route>
