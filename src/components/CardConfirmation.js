@@ -20,6 +20,18 @@ const CardConfirmation = (props) => {
                 {" "}
                 VER{" "}
               </button>
+              <div className="d-flex">
+                <button className="btn btn-success" id={props.data.id}>
+                  {" "}
+                  ACEPTAR{" "}
+                </button>
+              </div>
+              <div className="d-flex">
+                <button className="btn btn-danger" id={props.data.id}>
+                  {" "}
+                  RECHAZAR{" "}
+                </button>
+              </div>
             </div>
           </div>
         </div>
