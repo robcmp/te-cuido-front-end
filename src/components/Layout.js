@@ -9,8 +9,8 @@ import Admin from "../views/Admin";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "./Profile";
 import Service from "../views/Service";
-import Listpublication from "../views/Listpublication";
-import ServicesPublication from "../views/ServicesPublication";
+import ListPublications from "../views/ListPublications";
+import ServiceHistory from "../views/ServiceHistory";
 
 const Layout = () => {
   return (
@@ -24,12 +24,10 @@ const Layout = () => {
           <Route exact path="/login">
             <Login />
           </Route>
+          <PrivateRoute exact path="/user" component={() => <User />} />
           <PrivateRoute
-            exact path="/user"
-            component={() => <User />}
-          />
-          <PrivateRoute
-            exact path="/user/profile"
+            exact
+            path="/user/profile"
             component={() => <Profile />}
           />
           <Route exact path="/register">
@@ -38,18 +36,18 @@ const Layout = () => {
           <Route exact path="/admin">
             <Admin />
           </Route>
-          <PrivateRoute
-            exact path="/user/list_publication"
-            component={() => <Listpublication />}
-          />
-          <PrivateRoute
-            exact path="/user/service_publication"
-            component={() => <Service />}
-          />
-          <PrivateRoute 
-          exact path="/user/services"
-          component={() => <ServicesPublication />}
-          />
+          <Route exact path="/list_publication">
+            <ListPublications />
+          </Route>
+
+          <Route exact path="/services">
+            <Service />
+          </Route>
+
+          <Route exact path="/user/service_history">
+            <ServiceHistory />
+          </Route>
+
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
       </div>
