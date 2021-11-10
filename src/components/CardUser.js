@@ -168,9 +168,7 @@ const CardUser = (props) => {
                 BORRAR{" "}
               </button>
             </div>
-            <div className="d-flex">
-              
-            </div>
+            <div className="d-flex"></div>
           </div>
         </div>
       </div>
