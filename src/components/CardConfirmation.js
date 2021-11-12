@@ -5,6 +5,10 @@ import Swal from "sweetalert2";
 const CardConfirmation = (props) => {
   const { store, actions } = useContext(Context);
 
+  const ReserveDetail = () => {
+    actions.setDetailReserve(props.data);
+  };
+
   const confirmService = (e) => {
     Swal.fire({
       title: "Esta seguro de aceptar el servicio? ",
@@ -116,6 +120,7 @@ const CardConfirmation = (props) => {
                 id={props.data.id}
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
+                onClick={ReserveDetail}
               >
                 {" "}
                 VER{" "}
@@ -167,7 +172,12 @@ const CardConfirmation = (props) => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">...</div>
+            <div className="modal-body">
+              <p>{store.detailReserve.notes}</p>
+              <p>{store.detailReserve.date_init}</p>
+              <p>{store.detailReserve.price}</p>
+              <p>{store.detailReserve.date_end}</p>
+            </div>
             <div className="modal-footer">
               <button
                 type="button"
