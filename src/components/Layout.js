@@ -56,7 +56,7 @@ const Layout = () => {
 
           <Route exact path="/user/client_reservation">
             <ClientReservation />
-          </Route>
+          </Route> *
 
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
