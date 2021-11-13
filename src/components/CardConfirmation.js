@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 const CardConfirmation = (props) => {
   const { store, actions } = useContext(Context);
 
-  const ReserveDetail = () => {
+  const reserveDetail = () => {
     actions.setDetailReserve(props.data);
   };
 
@@ -120,7 +120,7 @@ const CardConfirmation = (props) => {
                 id={props.data.id}
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
-                onClick={ReserveDetail}
+                onClick={reserveDetail}
               >
                 {" "}
                 VER{" "}
