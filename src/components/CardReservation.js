@@ -1,33 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CardConfirmation = (props) => {
+const CardReservation = (props) => {
+  const { id } = useParams();
   const { store, actions } = useContext(Context);
 
   const reserveDetail = () => {
     actions.setDetailReserve(props.data);
   };
 
-  const confirmService = (e) => {
-    Swal.fire({
-      title: "Esta seguro de aceptar el servicio? ",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Si",
-      denyButtonText: `No aceptar`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        confirmServiceById(e.target.id);
-      } else if (result.isDenied) {
-        Swal.fire("El servicio no ha sido aceptado", "", "info");
-      }
-    });
-  };
+  useEffect(() => {
+    // luego de montarse el componente, le pedimos al backend el preferenceId
 
-  const confirmServiceById = (id) => {
-    const REST_API_URL = `http://localhost:5000/reserve_confirmation/${id}`;
+    const REST_API_URL = `http://localhost:5000/payment/${id}`;
     fetch(REST_API_URL, {
       method: "PUT",
       headers: {
@@ -55,11 +42,11 @@ const CardConfirmation = (props) => {
         });
         console.log(error);
       });
-  };
+  }, [id]);
 
-  const rejectService = (e) => {
+  const payService = (e) => {
     Swal.fire({
-      title: "Esta seguro de aceptar el servicio?",
+      title: "Esta seguro pagar este servicio?",
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Si",
@@ -67,42 +54,10 @@ const CardConfirmation = (props) => {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        rejectServiceById(e.target.id);
       } else if (result.isDenied) {
-        Swal.fire("El servicio no ha sido rechazado", "", "info");
+        Swal.fire("El servicio no ha sido pagado", "", "info");
       }
     });
-  };
-
-  const rejectServiceById = (id) => {
-    const REST_API_URL = `http://localhost:5000/reserve_rejection/${id}`;
-    fetch(REST_API_URL, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          // return response.json();
-          Swal.fire("Servicio rechazado", "", "success");
-        } else if (response.status === 404) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Error al rechazar servicio",
-          });
-        }
-      })
-      .then((data) => {})
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Error al rechazar servicio",
-        });
-        console.log(error);
-      });
   };
 
   return (
@@ -127,22 +82,12 @@ const CardConfirmation = (props) => {
               </button>
               <div className="d-flex">
                 <button
-                  className="btn btn-success"
+                  className="btn btn-info"
                   id={props.data.id}
-                  onClick={confirmService}
+                  onClick={payService}
                 >
                   {" "}
-                  ACEPTAR{" "}
-                </button>
-              </div>
-              <div className="d-flex">
-                <button
-                  className="btn btn-danger"
-                  id={props.data.id}
-                  onClick={rejectService}
-                >
-                  {" "}
-                  RECHAZAR{" "}
+                  PAGAR{" "}
                 </button>
               </div>
             </div>
@@ -197,4 +142,4 @@ const CardConfirmation = (props) => {
   );
 };
 
-export default CardConfirmation;
+export default CardReservation;
