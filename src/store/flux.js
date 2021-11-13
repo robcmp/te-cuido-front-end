@@ -3,12 +3,12 @@ export const getState = ({ setStore, getStore, getActions }) => {
     store: {
       profileUser: {},
       detailService: {},
+      detailReserve: {},
     },
     actions: {
       setProfile: (data) => {
         setStore({ profileUser: data });
       },
-
       getPeopleinfo: (id) => {
         const actions = getActions();
         let url = "http://localhost:5000/user" + id;
@@ -21,6 +21,9 @@ export const getState = ({ setStore, getStore, getActions }) => {
       },
       setDetail: (obj) => {
         setStore({ detailService: obj });
+      },
+      setDetailReserve: (obj) => {
+        setStore({ detailReserve: obj });
       },
     },
   };
