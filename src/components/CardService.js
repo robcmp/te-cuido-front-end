@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const CardService = (props) => {
   const { store, actions } = useContext(Context);
-  const Reservar = () => {
+  const reservar = () => {
     Swal.fire({
       title: "Reserva hecha!",
       //text: "esta es la respuesta de la prueba",
@@ -16,7 +16,7 @@ const CardService = (props) => {
     });
   };
 
-  const ServiceDetail = () => {
+  const serviceDetail = () => {
     actions.setDetail(props.data);
   };
 
@@ -35,14 +35,14 @@ const CardService = (props) => {
                 id={props.data.id}
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
-                onClick={ServiceDetail}
+                onClick={serviceDetail}
               >
                 {" "}
                 VER{" "}
               </button>
             </div>
             <div className="d-flex">
-              <button className="btn btn-primary" onClick={Reservar}>
+              <button className="btn btn-primary" onClick={reservar}>
                 {" "}
                 RESERVAR{" "}
               </button>
