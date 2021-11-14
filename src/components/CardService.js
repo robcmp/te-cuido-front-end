@@ -76,7 +76,7 @@ const CardService = (props) => {
 
   const updatePage = () => {
     console.log("Hola Aqui");
-    setInterval(history.push("/user/service_history"), 10000);
+    setInterval(history.push("/user/client_reservation"), 10000);
   };
   const serviceDetail = () => {
     actions.setDetail(props.data);
