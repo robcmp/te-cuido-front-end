@@ -23,40 +23,45 @@ const Layout = () => {
           <Route exact path="/">
             <Home />
           </Route>
+          {/*---------------------------Routes for everyone in the app---------------------------*/}
           <Route exact path="/login">
             <Login />
           </Route>
+          <Route exact path="/register">
+            <Register />
+          </Route>
+          {/*---------------------------End Routes for everyone in the app---------------------------*/}
+
+          <Route exact path="/admin">
+            <Admin />
+          </Route>
+
           <PrivateRoute exact path="/user" component={() => <User />} />
           <PrivateRoute
             exact
             path="/user/profile"
             component={() => <Profile />}
           />
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <Route exact path="/admin">
-            <Admin />
-          </Route>
-          <Route exact path="/list_publication">
+          {/*------------------- Routes for Client(Elderlies) in the app--------------------------*/}
+          <Route exact path="/user/list_publication">
             <ListPublications />
           </Route>
+          <Route exact path="/user/client_reservation">
+            <ClientReservation />
+          </Route>
+          {/*------------------End Routes for Client(Elderlies) in the app---------------------------*/}
 
-          <Route exact path="/services">
+          {/*---------------------------Routes for Client(Carer) in the app---------------------------*/}
+          <Route exact path="/user/service_publication">
             <Service />
           </Route>
-
           <Route exact path="/user/service_history">
             <ServiceHistory />
           </Route>
-
           <Route exact path="/user/service_confirmation">
             <ServiceConfirmation />
           </Route>
-
-          <Route exact path="/user/client_reservation">
-            <ClientReservation />
-          </Route> *
+          {/*---------------------------End Routes for Client(Carer) in the app---------------------------*/}
 
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>

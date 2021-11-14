@@ -13,7 +13,7 @@ const ServiceHistory = () => {
   let id = profil.user.id;
   // console.log(id);
   useEffect(() => {
-    const REST_API_URL = `http://localhost:5000/service_history/${id}`;
+    const REST_API_URL = `http://localhost:5000/reservations/carer/${id}`;
     fetch(REST_API_URL, {
       method: "GET",
       headers: { "Content-Type": "application/json" },

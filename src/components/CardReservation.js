@@ -2,6 +2,9 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import ReactDOM from "react-dom";
+
+const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 const CardReservation = (props) => {
   const { id } = useParams();
@@ -11,37 +14,53 @@ const CardReservation = (props) => {
     actions.setDetailReserve(props.data);
   };
 
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: "0.01",
+          },
+        },
+      ],
+    });
+  };
+
+  const onApprove = (data, actions) => {
+    return console.log(actions.order.capture());
+    alert("hola");
+    // Swal.fire("Servicio aceptado", "", "success");
+  };
   useEffect(() => {
     // luego de montarse el componente, le pedimos al backend el preferenceId
-
-    const REST_API_URL = `http://localhost:5000/payment/${id}`;
-    fetch(REST_API_URL, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          // return response.json();
-          Swal.fire("Servicio aceptado", "", "success");
-        } else if (response.status === 404) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Error al confirmar servicio",
-          });
-        }
-      })
-      .then((data) => {})
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Error al confirmar servicio",
-        });
-        console.log(error);
-      });
+    // const REST_API_URL = `http://localhost:5000/payment/${id}`;
+    // fetch(REST_API_URL, {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       // return response.json();
+    //       Swal.fire("Servicio aceptado", "", "success");
+    //     } else if (response.status === 404) {
+    //       Swal.fire({
+    //         icon: "error",
+    //         title: "Oops...",
+    //         text: "Error al confirmar servicio",
+    //       });
+    //     }
+    //   })
+    //   .then((data) => {})
+    //   .catch((error) => {
+    //     Swal.fire({
+    //       icon: "error",
+    //       title: "Oops...",
+    //       text: "Error al confirmar servicio",
+    //     });
+    //     console.log(error);
+    //   });
   }, [id]);
 
   const payService = (e) => {
@@ -81,14 +100,10 @@ const CardReservation = (props) => {
                 VER{" "}
               </button>
               <div className="d-flex">
-                <button
-                  className="btn btn-info"
-                  id={props.data.id}
-                  onClick={payService}
-                >
-                  {" "}
-                  PAGAR{" "}
-                </button>
+                <PayPalButton
+                  createOrder={(data, actions) => createOrder(data, actions)}
+                  onApprove={(data, actions) => onApprove(data, actions)}
+                />
               </div>
             </div>
           </div>
