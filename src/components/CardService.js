@@ -1,21 +1,83 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
+import _ from "lodash";
+import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../index.css";
-import { Link } from "react-router-dom";
 // import "../styles/cardService.css";
 import Swal from "sweetalert2";
+import { number, string } from "yup/lib/locale";
 
 const CardService = (props) => {
   const { store, actions } = useContext(Context);
-  const reservar = () => {
-    Swal.fire({
-      title: "Reserva hecha!",
-      //text: "esta es la respuesta de la prueba",
-      icon: "success",
-      //button: "Aceptar Reserva"
-    });
+  const history = useHistory();
+
+  const objReserve = {
+    name: string,
+    gender: number,
+    age: number,
+    notes: string,
+    carer_id: number,
+    client_id: number,
+    status: string,
+  };
+  const reservar = (idService) => {
+    const detailService = _.omit(
+      store.detailService,
+      "age_end",
+      "date_start",
+      "date_end",
+      "price",
+      "status",
+      "id"
+    );
+
+    console.log(detailService);
+    console.log(store.profileUser.user.id);
+    objReserve["name"] = "Reserve 1";
+    objReserve["gender"] = detailService["gender"];
+    objReserve["age"] = detailService["age_start"];
+    objReserve["notes"] = detailService["notes"];
+    objReserve["carer_id"] = detailService["user_id"];
+    objReserve["client_id"] = store.profileUser.user.id;
+    objReserve["status"] = "RESERVED";
+
+    const REST_API_URL = `http://localhost:5000/reserve/${idService.target.id}`;
+    fetch(REST_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(objReserve),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // return response.json();
+          Swal.fire("Servicio aceptado", "", "success");
+          // updatePage();
+          // location.reload();
+        } else if (response.status === 404) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error al confirmar servicio",
+          });
+        }
+      })
+      .then((data) => {})
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Error al confirmar servicio",
+        });
+        console.log(error);
+      });
   };
 
+  const updatePage = () => {
+    console.log("Hola Aqui");
+    setInterval(history.push("/user/client_reservation"), 10000);
+  };
   const serviceDetail = () => {
     actions.setDetail(props.data);
   };
@@ -42,7 +104,11 @@ const CardService = (props) => {
               </button>
             </div>
             <div className="d-flex">
-              <button className="btn btn-primary" onClick={reservar}>
+              <button
+                id={props.data.id}
+                className="btn btn-primary"
+                onClick={reservar}
+              >
                 {" "}
                 RESERVAR{" "}
               </button>
