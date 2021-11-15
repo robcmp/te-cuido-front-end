@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import Swal from "sweetalert2";
+import { Modal, Button } from "react-bootstrap";
 
 const CardConfirmation = (props) => {
   const { store, actions } = useContext(Context);
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
+  };
 
   const reserveDetail = () => {
-    actions.setDetailReserve(props.data);
+    setShow(true);
   };
 
   const confirmService = (e) => {
@@ -118,8 +123,6 @@ const CardConfirmation = (props) => {
               <button
                 className="btn btn-primary"
                 id={props.data.id}
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
                 onClick={reserveDetail}
               >
                 {" "}
@@ -149,6 +152,30 @@ const CardConfirmation = (props) => {
           </div>
         </div>
       </div>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Detalles Servicio</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{props.data.notes}</p>
+          <p>{props.data.date_init}</p>
+          <p>{props.data.price}</p>
+          <p>{props.data.date_end}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+        </Modal.Footer>
+      </Modal>
 
       <div
         className="modal fade"
