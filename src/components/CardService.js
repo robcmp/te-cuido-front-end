@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import _ from "lodash";
 import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -6,10 +6,15 @@ import "../index.css";
 // import "../styles/cardService.css";
 import Swal from "sweetalert2";
 import { number, string } from "yup/lib/locale";
+import { Modal, Button } from "react-bootstrap";
 
 const CardService = (props) => {
   const { store, actions } = useContext(Context);
   const history = useHistory();
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
+  };
 
   const objReserve = {
     name: string,
@@ -79,8 +84,7 @@ const CardService = (props) => {
     setInterval(history.push("/user/client_reservation"), 10000);
   };
   const serviceDetail = () => {
-    actions.setDetail(props.data);
-    console.log(props.data);
+    setShow(true);
   };
 ///////////////////////////////////////////////////////////////
 //const CardService = (props) => {
@@ -99,8 +103,6 @@ const CardService = (props) => {
               <button
                 className="btn btn-primary"
                 id={props.data.id}
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
                 onClick={serviceDetail}
               >
                 {" "}
@@ -121,49 +123,29 @@ const CardService = (props) => {
         </div>
       </div>
 
-      <div
-        className="modal fade"
-        id="staticBackdrop"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
       >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
-                Modal title
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <p>{store.detailService.notes}</p>
-              <p>{store.detailService.date_init}</p>
-              <p>{store.detailService.price}</p>
-              <p>{store.detailService.date_end}</p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Understood
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+        <Modal.Header closeButton>
+          <Modal.Title>Detalles Servicio</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{props.data.notes}</p>
+          <p>{props.data.date_init}</p>
+          <p>{props.data.price}</p>
+          <p>{props.data.date_end}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

@@ -64,10 +64,9 @@ const Login = (props) => {
                   "access_token",
                   JSON.stringify(data.access_token)
                 );
-                history.push("/user");
-                // console.log(store);
-                // HANDLE RESPONSE DATA
-                // console.log(data);
+
+                const role = data.user.role;
+                role === 2 ? history.push("/carer") : history.push("/user");
               }
             })
             .catch((error) => {

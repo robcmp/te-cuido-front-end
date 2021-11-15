@@ -31,7 +31,7 @@ const ClientReservation = () => {
             <SidebarUser />
           </div>
           <div className="col-md-10">
-            <div id="page-wrap" className="d-flex justify-content-center">
+            <div id="page-wrap" className="col-md-12 my-3">
               {isLoading ? (
                 services.map((service, i) => (
                   <div className="col-md-3 my-3 mx-auto">
