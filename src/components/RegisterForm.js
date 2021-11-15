@@ -79,7 +79,8 @@ const RegisterForm = (props) => {
                 );
                 values2.role === false
                   ? (values2.role = 3)
-                  : (values2.role = 2);
+                  : (values2.role = 2)
+                console.log(values2);
                 const REST_API_URL = "http://localhost:5000/register";
                 fetch(REST_API_URL, {
                   method: "post",
@@ -238,9 +239,9 @@ const RegisterForm = (props) => {
                       name="number_id"
                       placeholder=""
                       type="string"
-                      // onChange={(event) => {
-                      //   console.log(event.target.value);
-                      // }}
+                    // onChange={(event) => {
+                    //   console.log(event.target.value);
+                    // }}
                     />
                     <ErrorMessage
                       name="number_id"
