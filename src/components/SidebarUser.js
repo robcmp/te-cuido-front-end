@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from "react";
-import { Context } from "../store/appContext";
-import { useHistory } from "react-router-dom";
+import React from "react";
+// import { Context } from "../store/appContext";
+// import { useHistory } from "react-router-dom";
 import "../styles/sidebarUser.css";
 import { slide as Menu } from "react-burger-menu";
 import { Link } from "react-router-dom";
 
 const SidebarUser = (props) => {
-  const { store, actions } = useContext(Context);
-  const history = useHistory();
+  // const { store, actions } = useContext(Context);
+  // const history = useHistory();
 
   const getStorage = JSON.parse(localStorage.getItem("loginUser"));
 
@@ -16,19 +16,15 @@ const SidebarUser = (props) => {
       <Link className="menu-item" to="/user/profile">
         <i className="bi bi-person-square"></i>Información Personal
       </Link>
-      {getStorage.user.role !== undefined ? (
-        getStorage.user.role === 2 ? (
-          <Link className="menu-item" to="/user/service_publication">
-            <i className="bi bi-cart-dash"></i>Publicación de Servicios
-          </Link>
-        ) : (
-          <></>
-        )
+      {getStorage.user.role === 2 ? (
+        <Link className="menu-item" to="/carer/service_publication">
+          <i className="bi bi-cart-dash"></i>Publicación de Servicios
+        </Link>
       ) : (
-        history.push("/login")
+        <></>
       )}
       {getStorage.user.role === 2 ? (
-        <Link className="menu-item" to="/user/service_confirmation">
+        <Link className="menu-item" to="/carer/service_confirmation">
           <i className="bi bi-cart-dash"></i>Pendientes
         </Link>
       ) : (
@@ -38,7 +34,7 @@ const SidebarUser = (props) => {
       )}
 
       {getStorage.user.role === 2 ? (
-        <Link className="menu-item" to="/user/service_history">
+        <Link className="menu-item" to="/carer/service_history">
           <i className="bi bi-cart-dash"></i>Historial de Servicios
         </Link>
       ) : (
