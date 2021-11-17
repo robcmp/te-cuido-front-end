@@ -1,23 +1,90 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import _ from "lodash";
+import { useHistory } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../index.css";
-import { Link } from "react-router-dom";
 // import "../styles/cardService.css";
 import Swal from "sweetalert2";
+import { number, string } from "yup/lib/locale";
+import { Modal, Button } from "react-bootstrap";
 
 const CardService = (props) => {
   const { store, actions } = useContext(Context);
-  const Reservar = () => {
-    Swal.fire({
-      title: "Reserva hecha!",
-      //text: "esta es la respuesta de la prueba",
-      icon: "success",
-      //button: "Aceptar Reserva"
-    });
+  const history = useHistory();
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
   };
 
-  const ServiceDetail = () => {
-    actions.setDetail(props.data);
+  const objReserve = {
+    name: string,
+    gender: number,
+    age: number,
+    notes: string,
+    carer_id: number,
+    client_id: number,
+    status: string,
+  };
+  const reservar = (idService) => {
+    const detailService = _.omit(
+      store.detailService,
+      "age_end",
+      "date_start",
+      "date_end",
+      "price",
+      "status",
+      "id"
+    );
+
+    console.log(detailService);
+    console.log(store.profileUser.user.id);
+    objReserve["name"] = "Reserve 1";
+    objReserve["gender"] = detailService["gender"];
+    objReserve["age"] = detailService["age_start"];
+    objReserve["notes"] = detailService["notes"];
+    objReserve["carer_id"] = detailService["user_id"];
+    objReserve["client_id"] = store.profileUser.user.id;
+    objReserve["status"] = "RESERVED";
+
+    const REST_API_URL = `http://localhost:5000/reserve/${idService.target.id}`;
+    fetch(REST_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(objReserve),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // return response.json();
+          Swal.fire("Servicio aceptado", "", "success");
+          // updatePage();
+          // location.reload();
+        } else if (response.status === 404) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Error al confirmar servicio",
+          });
+        }
+      })
+      .then((data) => {})
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Error al confirmar servicio",
+        });
+        console.log(error);
+      });
+  };
+
+  const updatePage = () => {
+    console.log("Hola Aqui");
+    setInterval(history.push("/user/client_reservation"), 10000);
+  };
+  const serviceDetail = () => {
+    setShow(true);
   };
 
   return (
@@ -33,16 +100,18 @@ const CardService = (props) => {
               <button
                 className="btn btn-primary"
                 id={props.data.id}
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
-                onClick={ServiceDetail}
+                onClick={serviceDetail}
               >
                 {" "}
                 VER{" "}
               </button>
             </div>
             <div className="d-flex">
-              <button className="btn btn-primary" onClick={Reservar}>
+              <button
+                id={props.data.id}
+                className="btn btn-primary"
+                onClick={reservar}
+              >
                 {" "}
                 RESERVAR{" "}
               </button>
@@ -51,49 +120,29 @@ const CardService = (props) => {
         </div>
       </div>
 
-      <div
-        className="modal fade"
-        id="staticBackdrop"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
       >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
-                Modal title
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <p>{store.detailService.notes}</p>
-              <p>{store.detailService.date_init}</p>
-              <p>{store.detailService.price}</p>
-              <p>{store.detailService.date_end}</p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Understood
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+        <Modal.Header closeButton>
+          <Modal.Title>Detalles Servicio</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{props.data.notes}</p>
+          <p>{props.data.date_init}</p>
+          <p>{props.data.price}</p>
+          <p>{props.data.date_end}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary">Understood</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

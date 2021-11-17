@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import _ from "lodash";
 import * as Yup from "yup";
@@ -6,6 +7,7 @@ import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import Swal from "sweetalert2";
 
 const Services = () => {
+  const { store } = useContext(Context);
   const [date, setDate] = useState([new Date(), new Date()]);
   const formSchema = Yup.object().shape({
     age_start: Yup.number().required("Campo requerido"),
@@ -35,9 +37,14 @@ const Services = () => {
           } else if (values.checkMale) {
             values2.gender = 2;
           }
+
+          //Adding new keys and properties to the object values 2
+          values2.date_start = date[0];
+          values2.date_end = date[1];
+          //Manipulating object 2 and assigning to values3
           let values3 = _.omit(values2, "checkFemale", "checkMale", "date");
-          console.log(values3);
-          let id = 2;
+          //Assigning to the id variable store info to set correctly the id
+          let id = store.profileUser.user.id;
           const REST_API_URL = `http://localhost:5000/services/${id}`;
           fetch(REST_API_URL, {
             method: "post",

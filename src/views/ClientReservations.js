@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import SidebarUser from "../components/SidebarUser";
 import UserList from "../components/UserList";
-import CardConfirmation from "../components/CardConfirmation";
+import CardReservation from "../components/CardReservation";
 
-const ServiceConfirmation = () => {
+const ClientReservation = () => {
   const { store, actions } = useContext(Context);
   const [services, setServices] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ const ServiceConfirmation = () => {
   let id = profil.user.id;
   // console.log(id);
   useEffect(() => {
-    const REST_API_URL = `http://localhost:5000/reserved_service/${id}`;
+    const REST_API_URL = `http://localhost:5000/reservations/client/${id}`;
     fetch(REST_API_URL, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ const ServiceConfirmation = () => {
               {isLoading ? (
                 services.map((service, i) => (
                   <div className="col-md-3 my-3 mx-auto">
-                    <CardConfirmation
+                    <CardReservation
                       key={i}
                       data={service}
                       image="https://via.placeholder.com/400x200"
@@ -43,7 +43,7 @@ const ServiceConfirmation = () => {
                   </div>
                 ))
               ) : (
-                <h1>No tiene Servicios Reservados</h1>
+                <h1>No tiene reservas pendientes</h1>
               )}
             </div>
           </div>
@@ -53,4 +53,4 @@ const ServiceConfirmation = () => {
   );
 };
 
-export default ServiceConfirmation;
+export default ClientReservation;

@@ -6,12 +6,14 @@ import Login from "../views/Login";
 import Register from "./RegisterForm";
 import User from "../views/User";
 import Admin from "../views/Admin";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRouteClient from "./PrivateRouteClient";
 import Profile from "./Profile";
 import Service from "../views/Service";
 import ListPublications from "../views/ListPublications";
 import ServiceHistory from "../views/ServiceHistory";
 import ServiceConfirmation from "../views/ServiceConfirmation";
+import ClientReservation from "../views/ClientReservations";
+import PrivateRouteCarer from "./PrivateRouteCarer";
 
 const Layout = () => {
   return (
@@ -22,36 +24,63 @@ const Layout = () => {
           <Route exact path="/">
             <Home />
           </Route>
+          {/*---------------------------Routes for everyone in the app---------------------------*/}
           <Route exact path="/login">
             <Login />
           </Route>
-          <PrivateRoute exact path="/user" component={() => <User />} />
-          <PrivateRoute
+          <Route exact path="/register">
+            <Register />
+          </Route>
+          {/*---------------------------End Routes for everyone in the app---------------------------*/}
+
+          {/* <Route exact path="/admin">
+            <Admin />
+          </Route> */}
+
+          {/*------------------- Routes for Client(Elderlies) in the app--------------------------*/}
+          <PrivateRouteClient exact path="/user" component={() => <User />} />
+          <PrivateRouteClient
             exact
             path="/user/profile"
             component={() => <Profile />}
           />
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <Route exact path="/admin">
-            <Admin />
-          </Route>
-          <Route exact path="/list_publication">
-            <ListPublications />
-          </Route>
+          <PrivateRouteClient
+            exact
+            path="/user/list_publication"
+            component={() => <ListPublications />}
+          />
+          <PrivateRouteClient
+            exact
+            path="/user/client_reservation"
+            component={() => <ClientReservation />}
+          />
 
-          <Route exact path="/services">
-            <Service />
-          </Route>
+          {/*------------------End Routes for Client(Elderlies) in the app---------------------------*/}
 
-          <Route exact path="/user/service_history">
-            <ServiceHistory />
-          </Route>
+          {/*---------------------------Routes for Client(Carer) in the app---------------------------*/}
+          <PrivateRouteCarer exact path="/carer" component={() => <User />} />
+          <PrivateRouteCarer
+            exact
+            path="/carer/profile"
+            component={() => <Profile />}
+          />
+          <PrivateRouteCarer
+            exact
+            path="/carer/service_publication"
+            component={() => <Service />}
+          />
+          <PrivateRouteCarer
+            exact
+            path="/carer/service_history"
+            component={() => <ServiceHistory />}
+          />
+          <PrivateRouteCarer
+            exact
+            path="/carer/service_confirmation"
+            component={() => <ServiceConfirmation />}
+          />
 
-          <Route exact path="/user/service_confirmation">
-            <ServiceConfirmation />
-          </Route>
+          {/*---------------------------End Routes for Client(Carer) in the app---------------------------*/}
 
           <Route render={() => <h1>Not found</h1>}></Route>
         </Switch>
