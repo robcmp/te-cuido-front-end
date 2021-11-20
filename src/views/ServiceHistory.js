@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import CardServiceHistory from "../components/CardServiceHistory";
 import Swal from "sweetalert2";
-import SidebarUser from "../components/SidebarUser";
 
 const ServiceHistory = () => {
   const { store, actions } = useContext(Context);
@@ -26,9 +25,7 @@ const ServiceHistory = () => {
     <div className="container-fluid">
       <div className="row">
         <div id="outer-container">
-          <div className="col-md-2">
-            <SidebarUser />
-          </div>
+          <div className="col-md-2"></div>
           <div className="col-md-10">
             {services.map((service, i) => (
               <div className="col-md-3 my-3 mx-auto">

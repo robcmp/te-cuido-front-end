@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import SidebarUser from "../components/SidebarUser";
+
 import UserList from "../components/UserList";
 import CardReservation from "../components/CardReservation";
 
@@ -26,27 +26,21 @@ const ClientReservation = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div id="outer-container">
-          <div className="col-md-2">
-            <SidebarUser />
-          </div>
-          <div className="col-md-10">
-            <div id="page-wrap" className="col-md-12 my-3">
-              {isLoading ? (
-                services.map((service, i) => (
-                  <div className="col-md-3 my-3 mx-auto">
-                    <CardReservation
-                      key={i}
-                      data={service}
-                      image="https://via.placeholder.com/400x200"
-                    />
-                  </div>
-                ))
-              ) : (
-                <h1>No tiene reservas pendientes</h1>
-              )}
-            </div>
-          </div>
+        <div className="col-md-2"></div>
+        <div className="col-md-10">
+          {isLoading ? (
+            services.map((service, i) => (
+              <div className="col-md-3 my-3 mx-auto">
+                <CardReservation
+                  key={i}
+                  data={service}
+                  image="https://via.placeholder.com/400x200"
+                />
+              </div>
+            ))
+          ) : (
+            <h1>No tiene reservas pendientes</h1>
+          )}
         </div>
       </div>
     </div>

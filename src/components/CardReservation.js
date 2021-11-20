@@ -13,8 +13,12 @@ const CardReservation = (props) => {
 
   //REACT BOOTSTRAP MODAL
   const [show, setShow] = useState(false);
+  const [showPay, setShowPay] = useState(false);
   const handleClose = () => {
     setShow(false);
+  };
+  const handleClosePay = () => {
+    setShowPay(false);
   };
 
   //REACT BOOTSTRAP MODAL
@@ -29,7 +33,7 @@ const CardReservation = (props) => {
       purchase_units: [
         {
           amount: {
-            value: "0.01",
+            value: "50",
           },
         },
       ],
@@ -74,19 +78,7 @@ const CardReservation = (props) => {
   }, [id]);
 
   const payService = (e) => {
-    Swal.fire({
-      title: "Esta seguro pagar este servicio?",
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Si",
-      denyButtonText: `No aceptar`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-      } else if (result.isDenied) {
-        Swal.fire("El servicio no ha sido pagado", "", "info");
-      }
-    });
+    setShowPay(true);
   };
 
   return (
@@ -98,23 +90,25 @@ const CardReservation = (props) => {
         </div>
         <div className="card-footer text-center">
           <div className="d-flex justify-content-evenly">
-            <div className="d-flex">
+            <div className="d-flex m-4">
               <button
                 className="btn btn-primary"
                 id={props.data.id}
-                // data-bs-toggle="modal"
-                // data-bs-target="#staticBackdrop"
                 onClick={reserveDetail}
               >
                 {" "}
                 VER{" "}
               </button>
-              <div className="d-flex">
-                <PayPalButton
-                  createOrder={(data, actions) => createOrder(data, actions)}
-                  onApprove={(data, actions) => onApprove(data, actions)}
-                />
-              </div>
+            </div>
+            <div className="d-flex m-4">
+              <button
+                className="btn btn-primary"
+                id={props.data.id}
+                onClick={payService}
+              >
+                {" "}
+                PAGAR{" "}
+              </button>
             </div>
           </div>
         </div>
@@ -128,7 +122,7 @@ const CardReservation = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
+          <Modal.Title>Servicio</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>{props.data.notes}</p>
@@ -138,9 +132,33 @@ const CardReservation = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cerrar
           </Button>
-          <Button variant="primary">Understood</Button>
+          <Button variant="primary">Prueba</Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={showPay}
+        onHide={handleClosePay}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Pago</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <PayPalButton
+            createOrder={(data, actions) => createOrder(data, actions)}
+            onApprove={(data, actions) => onApprove(data, actions)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClosePay}>
+            Cerrar
+          </Button>
+          <Button variant="primary">Prueba</Button>
         </Modal.Footer>
       </Modal>
     </>
