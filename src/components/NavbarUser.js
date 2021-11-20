@@ -109,14 +109,6 @@ const NavbarUser = () => {
                   </Link>
                 )}
               </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link btn-outline-primary rounded-pill px-3"
-                  href="/#"
-                >
-                  In prog
-                </a>
-              </li>
             </ul>
           </div>
           <div className="navbar align-self-center d-flex">
