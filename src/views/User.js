@@ -1,5 +1,4 @@
 import React from "react";
-import SidebarUser from "../components/SidebarUser";
 import { useEffect, useState } from "react";
 
 const User = () => {
