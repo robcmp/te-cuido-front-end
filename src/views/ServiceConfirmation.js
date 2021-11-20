@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import SidebarUser from "../components/SidebarUser";
+
 import UserList from "../components/UserList";
 import CardConfirmation from "../components/CardConfirmation";
 import { slide as Menu } from "react-burger-menu";

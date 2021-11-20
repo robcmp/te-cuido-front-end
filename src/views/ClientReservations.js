@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import SidebarUser from "../components/SidebarUser";
+
 import UserList from "../components/UserList";
 import CardReservation from "../components/CardReservation";
 
@@ -26,9 +26,7 @@ const ClientReservation = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
-          <SidebarUser />
-        </div>
+        <div className="col-md-2"></div>
         <div className="col-md-10">
           {isLoading ? (
             services.map((service, i) => (
