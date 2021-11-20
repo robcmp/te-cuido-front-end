@@ -1,14 +1,20 @@
 import React from "react";
+import "../styles/navbar.css";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const usePathname = () => {
     const location = useLocation();
     return location.pathname;
-  }
-  return (
-     usePathname()==="/" |  usePathname()==="/register" | usePathname()==="/login" ?
-    <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  };
+  return (usePathname() === "/") |
+    (usePathname() === "/register") |
+    (usePathname() === "/login") |
+    (usePathname() === "/aboutus") ? (
+    <nav
+      id="main_nav"
+      className="navbar fixed-top navbar-expand-lg navbar-light bg-white shadow"
+    >
       <div className="container-fluid">
         <a className="navbar-brand" href="/#">
           <img
@@ -29,15 +35,56 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/#">
-               <strong>Home</strong>
-              </a>
-            </li>
-          </ul>
-          <div className="d-flex">
+        <div
+          className="align-self-center collapse navbar-collapse d-lg-flex justify-content-lg-between"
+          id="navbarSupportedContent"
+        >
+          <div class="flex-fill mx-xl-5 mb-2">
+            <ul className="nav navbar-nav d-flex justify-content-between mx-xl-5 text-center text-dark">
+              <li className="nav-item">
+                <Link
+                  className="nav-link btn-outline-primary rounded-pill px-3"
+                  aria-current="page"
+                  to="/"
+                >
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link btn-outline-primary rounded-pill px-3"
+                  to="/aboutus"
+                >
+                  Nosotros
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link btn-outline-primary rounded-pill px-3"
+                  href="/#"
+                >
+                  In prog
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link btn-outline-primary rounded-pill px-3"
+                  href="/#"
+                >
+                  In prog
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link btn-outline-primary rounded-pill px-3"
+                  href="/#"
+                >
+                  In prog
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="navbar align-self-center d-flex">
             <Link
               to="/login"
               className="btn btn-primary me-4 fw-bold"
@@ -57,8 +104,8 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-    :
-  <></>
+  ) : (
+    <></>
   );
 };
 

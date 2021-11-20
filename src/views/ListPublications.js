@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import SidebarUser from "../components/SidebarUser";
 
 import CardService from "../components/CardService";
 
@@ -22,9 +21,7 @@ const ListPublications = () => {
     <div className="container-fluid">
       <div className="row">
         <div id="outer-container">
-          <div className="col-md-2">
-            <SidebarUser />
-          </div>
+          <div className="col-md-2"></div>
           <div className="col-md-10">
             <div id="page-wrap" className="col-md-12 my-3">
               {isLoading ? (

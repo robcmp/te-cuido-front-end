@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import SidebarUser from "../components/SidebarUser";
+
 import UserList from "../components/UserList";
 import CardConfirmation from "../components/CardConfirmation";
+import { slide as Menu } from "react-burger-menu";
 
 const ServiceConfirmation = () => {
   const { store, actions } = useContext(Context);
@@ -24,32 +25,26 @@ const ServiceConfirmation = () => {
   }, []);
 
   return (
-    <div className="container-fluid">
+    <>
       <div className="row">
-        <div id="outer-container">
-          <div className="col-md-2">
-            <SidebarUser />
-          </div>
-          <div className="col-md-10">
-            <div id="page-wrap" className="col-md-12 my-3">
-              {isLoading ? (
-                services.map((service, i) => (
-                  <div className="col-md-3 my-3 mx-auto">
-                    <CardConfirmation
-                      key={i}
-                      data={service}
-                      image="https://via.placeholder.com/400x200"
-                    />
-                  </div>
-                ))
-              ) : (
-                <h1>No tiene Servicios Reservados</h1>
-              )}
-            </div>
-          </div>
+        <div className="col-md-12">
+          {isLoading ? (
+            services.map((service, i) => (
+              <div className="my-3">
+                <CardConfirmation
+                  key={i}
+                  data={service}
+                  image="https://via.placeholder.com/400x200"
+                />
+              </div>
+            ))
+          ) : (
+            <h1>No tiene Servicios Reservados</h1>
+          )}
+          ;
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
