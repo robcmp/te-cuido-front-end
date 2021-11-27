@@ -1,56 +1,59 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
 import "../index.css";
 import Swal from "sweetalert2";
 
-const deleteServices = (e) => {
-  Swal.fire({
-    title: "Usted quiere borrar el servicio?",
-    showDenyButton: true,
-    showCancelButton: true,
-    confirmButtonText: "Si",
-    denyButtonText: `No borrar`,
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      deleteServicesById(e.target.id);
-    } else if (result.isDenied) {
-      Swal.fire("El servicio a sido borrado", "", "info");
-    }
-  });
-};
+const CardServiceHistory = (props) => {
+  const { store, actions } = useContext(Context);
 
-const deleteServicesById = (id) => {
-  const REST_API_URL = `http://localhost:5000/delete_services_by_id/${id}`;
-  fetch(REST_API_URL, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (response.ok) {
-        // return response.json();
-        Swal.fire("Servicio Borrado", "", "success");
-      } else if (response.status === 404) {
+  const deleteServices = (e) => {
+    Swal.fire({
+      title: "Usted quiere borrar el servicio?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      denyButtonText: `No borrar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        deleteServicesById(e.target.id);
+      } else if (result.isDenied) {
+        Swal.fire("El servicio a sido borrado", "", "info");
+      }
+    });
+  };
+
+  const deleteServicesById = (id) => {
+    const REST_API_URL = `http://localhost:5000/delete_services_by_id/${id}`;
+    fetch(REST_API_URL, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          // return response.json();
+          Swal.fire("Servicio Borrado", "", "success");
+        } else if (response.status === 404) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "El servicio fue borrado",
+          });
+        }
+      })
+      .then((data) => {})
+      .catch((error) => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "El servicio fue borrado",
+          text: "El servicio ya fue borrado",
         });
-      }
-    })
-    .then((data) => {})
-    .catch((error) => {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "El servicio ya fue borrado",
+        console.log(error);
       });
-      console.log(error);
-    });
-};
+  };
 
-const CardServiceHistory = (props) => {
   return (
     <>
       <div className="card scrolling-wrapper borders">
@@ -80,7 +83,7 @@ const CardServiceHistory = (props) => {
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >

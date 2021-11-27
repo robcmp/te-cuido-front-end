@@ -19,8 +19,7 @@ const Services = () => {
     <div className="container">
       <Formik
         initialValues={{
-          checkFemale: false,
-          checkMale: false,
+          gender: "",
           age_start: "",
           age_end: "",
           notes: "",
@@ -30,22 +29,17 @@ const Services = () => {
         validationSchema={formSchema}
         onSubmit={(values, { resetForm }) => {
           let values2 = values;
-          if (values.checkFemale && values.checkMale) {
-            values2.gender = 3;
-          } else if (values.checkFemale) {
-            values2.gender = 1;
-          } else if (values.checkMale) {
-            values2.gender = 2;
-          }
 
           //Adding new keys and properties to the object values 2
           values2.date_start = date[0];
           values2.date_end = date[1];
+
           //Manipulating object 2 and assigning to values3
-          let values3 = _.omit(values2, "checkFemale", "checkMale", "date");
+          let values3 = _.omit(values2, "date");
           //Assigning to the id variable store info to set correctly the id
           let id = store.profileUser.user.id;
           const REST_API_URL = `http://localhost:5000/services/${id}`;
+
           fetch(REST_API_URL, {
             method: "post",
             headers: {
@@ -78,35 +72,48 @@ const Services = () => {
               // HANDLE ERROR
               console.log(error);
             });
-          console.log(values);
         }}
       >
         {({ values }) => (
           <div className="mt-5 pt-5 w-100 mx-auto">
             <div className="card border-info">
-              {/* <img src="..." class="card-img-top" alt="..." /> */}
-              <h5 className="card-header">Publicación de Servicio</h5>
+              <h5 className="card-header">
+                <strong>Publicación de Servicio</strong>
+              </h5>
               <div className="card-body">
                 <Form>
-                  <div className="row">
-                    <div>
+                  <div className="row g-3">
+                    <div className="col-md-4">
                       <Field
-                        type="checkbox"
-                        name="checkFemale"
+                        type="radio"
+                        name="gender"
+                        value="1"
                         className="form-check-input"
                       />
                       <label htmlFor="checkFemale" className="form-check-label">
                         Mujer
                       </label>
                     </div>
-                    <div>
+                    <div className="col-md-4">
                       <Field
-                        type="checkbox"
-                        name="checkMale"
+                        type="radio"
+                        name="gender"
+                        value="2"
                         className="form-check-input"
                       />
                       <label htmlFor="checkMale" className="form-check-label">
                         Hombre
+                      </label>
+                    </div>
+                    <div className="col-md-4">
+                      <Field
+                        type="radio"
+                        name="gender"
+                        value="3"
+                        className="form-check-input"
+                      />
+                      <label htmlFor="checkMale" className="form-check-label">
+                        Ambos
                       </label>
                     </div>
 
@@ -118,7 +125,6 @@ const Services = () => {
                         placeholder="Edad desde"
                         type="number"
                         min="60"
-                        max="120"
                       />
                       <ErrorMessage
                         name="age_start"
@@ -133,6 +139,7 @@ const Services = () => {
                         name="age_end"
                         placeholder="hasta"
                         type="number"
+                        max="115"
                       />
                       <ErrorMessage
                         name="age_end"
@@ -171,16 +178,17 @@ const Services = () => {
                         type="number"
                       />
                     </div>
-
-                    <div className="col-md-6 mt-4">
+                    <div class="d-grid gap-2 mt-3">
+                      {/* <div className="col-md-6 mt-4"> */}
                       <button className="btn btn-primary" type="submit">
                         Enviar
                       </button>
-                    </div>
-                    <div className="col-md-6 mt-4">
+                      {/* </div> */}
+                      {/* <div className="col-md-6 mt-4"> */}
                       <button className="btn btn-warning" type="reset">
                         Cancelar
                       </button>
+                      {/* </div> */}
                     </div>
                   </div>
                 </Form>
