@@ -14,22 +14,28 @@ import ServiceHistory from "../views/ServiceHistory";
 import ServiceConfirmation from "../views/ServiceConfirmation";
 import ClientReservation from "../views/ClientReservations";
 import PrivateRouteCarer from "./PrivateRouteCarer";
+import About from "../views/About";
+import NavbarUser from "./NavbarUser";
 
 const Layout = () => {
   return (
     <Router>
       <Navbar />
+      <NavbarUser />
       <div className="container-fluid">
         <Switch>
+          {/*---------------------------Routes for everyone in the app---------------------------*/}
           <Route exact path="/">
             <Home />
           </Route>
-          {/*---------------------------Routes for everyone in the app---------------------------*/}
           <Route exact path="/login">
             <Login />
           </Route>
           <Route exact path="/register">
             <Register />
+          </Route>
+          <Route exact path="/aboutus">
+            <About />
           </Route>
           {/*---------------------------End Routes for everyone in the app---------------------------*/}
 

@@ -82,7 +82,10 @@ const RegisterForm = (props) => {
                 values2.role === false
                   ? (values2.role = 3)
                   : (values2.role = 2);
+
+                console.log(values2);
                 const REST_API_URL = "http://localhost:5000/register";
+
                 fetch(REST_API_URL, {
                   method: "post",
                   headers: {
@@ -122,7 +125,7 @@ const RegisterForm = (props) => {
                     // HANDLE ERROR
                     console.log(error);
                   });
-                // console.log(JSON.stringify(values));
+                console.log(JSON.stringify(values));
               }}
               onChange={(values) => {
                 console.log(values);
